@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Paths — HackerNotes</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+  <header class="header">
+    <a class="header-logo" href="index.html"><span class="logo-icon">💀</span><span>HackerNotes</span></a>
+    <nav class="header-nav">
+      <a href="index.html">Home</a>
+      <a href="paths.html" class="active">Paths</a>
+      <a href="search.html">Search</a>
+      <a href="https://github.com" target="_blank">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <div style="margin-top:60px;padding:40px 40px 20px">
+    <h1 style="font-size:28px;font-weight:800;margin-bottom:8px">📚 Learning Paths</h1>
+    <p style="color:var(--text-secondary)">Structured paths from fundamentals to expert. Each path ordered for progressive learning.</p>
+  </div>
+
+  <div id="paths-container" style="padding:0 40px 80px"></div>
+
+  <script src="data/navigation.json"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    const container = document.getElementById('paths-container');
+
+    Object.entries(NAV).forEach(([category, data]) => {
+      const folder = CAT_FOLDER[category];
+
+      const catDiv = document.createElement('div');
+      catDiv.id = folder;
+      catDiv.style.cssText = 'margin-bottom:48px';
+
+      catDiv.innerHTML = `<h2 style="font-size:20px;font-weight:800;color:var(--accent-green);display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border-color)">${data.icon} ${category}</h2>`;
+
+      data.phases.forEach(phase => {
+        const phaseDiv = document.createElement('div');
+        phaseDiv.style.cssText = 'margin-bottom:24px';
+        phaseDiv.innerHTML = `<h3 style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px">${phase.phase}</h3>`;
+
+        const steps = document.createElement('div');
+        steps.className = 'path-steps';
+
+        phase.notes.forEach((note, i) => {
+          const a = document.createElement('a');
+          a.className = 'path-step';
+          a.href = `viewer.html?note=${note.id}`;
+          a.innerHTML = `
+            <span class="step-num">${String(i + 1).padStart(2, '0')}</span>
+            <span class="step-title">${note.title}</span>
+            <span class="step-desc" style="color:var(--text-muted);font-size:12px">→</span>
+          `;
+          steps.appendChild(a);
+        });
+
+        phaseDiv.appendChild(steps);
+        catDiv.appendChild(phaseDiv);
+      });
+
+      container.appendChild(catDiv);
+    });
+
+    if (window.location.hash) {
+      const el = document.getElementById(window.location.hash.slice(1));
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
+    }
+  </script>
+</body>
+</html>

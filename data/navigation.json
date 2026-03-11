@@ -1,0 +1,315 @@
+// ===== HACKERNOTES NAVIGATION =====
+const NAV = {
+  "Web Pentesting": {
+    icon: "🌐",
+    color: "#58a6ff",
+    phases: [
+      {
+        phase: "01 — Foundations",
+        notes: [
+          { id: "web-pentesting/01-foundations/internet-architecture", title: "Internet Architecture" },
+          { id: "web-pentesting/01-foundations/dns",                   title: "DNS Deep Dive" },
+          { id: "web-pentesting/01-foundations/tcp-ip",                title: "TCP/IP Stack" },
+          { id: "web-pentesting/01-foundations/tls-ssl",               title: "TLS/SSL" },
+          { id: "web-pentesting/01-foundations/web-server-basics",     title: "Web Server Basics" },
+          { id: "web-pentesting/01-foundations/browser-architecture",  title: "Browser Architecture" },
+          { id: "web-pentesting/01-foundations/same-origin-policy",    title: "Same-Origin Policy" },
+          { id: "web-pentesting/01-foundations/content-security-policy", title: "Content Security Policy" }
+        ]
+      },
+      {
+        phase: "02 — Web Architecture",
+        notes: [
+          { id: "web-pentesting/02-web-architecture/modern-web-architecture", title: "Modern Web Architecture" },
+          { id: "web-pentesting/02-web-architecture/frontend-backend-model",  title: "Frontend/Backend Model" },
+          { id: "web-pentesting/02-web-architecture/reverse-proxies",         title: "Reverse Proxies" },
+          { id: "web-pentesting/02-web-architecture/web-caches",              title: "Web Caches" },
+          { id: "web-pentesting/02-web-architecture/cdn",                     title: "CDN Security" }
+        ]
+      },
+      {
+        phase: "03 — HTTP & Protocols",
+        notes: [
+          { id: "web-pentesting/03-http-protocol/http-basics",    title: "HTTP Basics" },
+          { id: "web-pentesting/03-http-protocol/http-methods",   title: "HTTP Methods" },
+          { id: "web-pentesting/03-http-protocol/http-headers",   title: "HTTP Headers" },
+          { id: "web-pentesting/03-http-protocol/cookies",        title: "Cookies" },
+          { id: "web-pentesting/03-http-protocol/cors",           title: "CORS" },
+          { id: "web-pentesting/03-http-protocol/websockets",     title: "WebSockets" },
+          { id: "web-pentesting/03-http-protocol/http2-http3",    title: "HTTP/2 & HTTP/3" }
+        ]
+      },
+      {
+        phase: "04 — Client-Side",
+        notes: [
+          { id: "web-pentesting/04-client-side/javascript-basics", title: "JavaScript for Hackers" },
+          { id: "web-pentesting/04-client-side/dom",               title: "DOM & DOM XSS" },
+          { id: "web-pentesting/04-client-side/ajax-fetch",        title: "AJAX & Fetch API" },
+          { id: "web-pentesting/04-client-side/web-storage",       title: "Web Storage Security" },
+          { id: "web-pentesting/04-client-side/browser-security",  title: "Browser Security Model" }
+        ]
+      },
+      {
+        phase: "05 — Authentication & Sessions",
+        notes: [
+          { id: "web-pentesting/05-authentication/authentication-mechanisms", title: "Auth Mechanisms Overview" },
+          { id: "web-pentesting/05-authentication/password-authentication",   title: "Password Authentication" },
+          { id: "web-pentesting/05-authentication/multi-factor-authentication", title: "MFA & Bypasses" },
+          { id: "web-pentesting/05-authentication/oauth",                     title: "OAuth 2.0 Attacks" },
+          { id: "web-pentesting/05-authentication/jwt",                       title: "JWT Attacks" },
+          { id: "web-pentesting/05-authentication/session-management",        title: "Session Management" },
+          { id: "web-pentesting/05-authentication/saml",                      title: "SAML Attacks" }
+        ]
+      },
+      {
+        phase: "06 — Core Vulnerabilities",
+        notes: [
+          { id: "web-pentesting/06-core-vulnerabilities/xss",                 title: "Cross-Site Scripting (XSS)" },
+          { id: "web-pentesting/06-core-vulnerabilities/sqli",                title: "SQL Injection" },
+          { id: "web-pentesting/06-core-vulnerabilities/csrf",                title: "CSRF" },
+          { id: "web-pentesting/06-core-vulnerabilities/command-injection",   title: "Command Injection" },
+          { id: "web-pentesting/06-core-vulnerabilities/file-upload",         title: "File Upload Attacks" },
+          { id: "web-pentesting/06-core-vulnerabilities/directory-traversal", title: "Directory Traversal & LFI" },
+          { id: "web-pentesting/06-core-vulnerabilities/open-redirect",       title: "Open Redirect" },
+          { id: "web-pentesting/06-core-vulnerabilities/input-validation",    title: "Input Validation & Injections" }
+        ]
+      },
+      {
+        phase: "07 — Advanced Vulnerabilities",
+        notes: [
+          { id: "web-pentesting/07-advanced-vulnerabilities/ssrf",                          title: "SSRF" },
+          { id: "web-pentesting/07-advanced-vulnerabilities/deserialization",               title: "Insecure Deserialization" },
+          { id: "web-pentesting/07-advanced-vulnerabilities/template-injection",            title: "Server-Side Template Injection" },
+          { id: "web-pentesting/07-advanced-vulnerabilities/race-conditions",               title: "Race Conditions" },
+          { id: "web-pentesting/07-advanced-vulnerabilities/http-request-smuggling",        title: "HTTP Request Smuggling" },
+          { id: "web-pentesting/07-advanced-vulnerabilities/cache-poisoning",               title: "Cache Poisoning" },
+          { id: "web-pentesting/07-advanced-vulnerabilities/prototype-pollution",           title: "Prototype Pollution" },
+          { id: "web-pentesting/07-advanced-vulnerabilities/business-logic-vulnerabilities", title: "Business Logic Flaws" }
+        ]
+      },
+      {
+        phase: "08 — API Security",
+        notes: [
+          { id: "web-pentesting/08-api-security/api-architecture",          title: "API Architecture" },
+          { id: "web-pentesting/08-api-security/rest-security",             title: "REST API Security" },
+          { id: "web-pentesting/08-api-security/graphql-security",          title: "GraphQL Security" },
+          { id: "web-pentesting/08-api-security/api-authentication",        title: "API Authentication" },
+          { id: "web-pentesting/08-api-security/broken-object-level-auth",  title: "BOLA / IDOR" },
+          { id: "web-pentesting/08-api-security/mass-assignment",           title: "Mass Assignment" }
+        ]
+      },
+      {
+        phase: "09 — Modern Web",
+        notes: [
+          { id: "web-pentesting/09-modern-web/spa-security",         title: "SPA Security" },
+          { id: "web-pentesting/09-modern-web/react-security",       title: "React Security" },
+          { id: "web-pentesting/09-modern-web/supply-chain-attacks",  title: "Supply Chain Attacks" },
+          { id: "web-pentesting/09-modern-web/third-party-scripts",   title: "Third-Party Script Risks" }
+        ]
+      },
+      {
+        phase: "10 — Methodology",
+        notes: [
+          { id: "web-pentesting/10-methodology/pentesting-methodology",  title: "Pentest Methodology" },
+          { id: "web-pentesting/10-methodology/reconnaissance",           title: "Reconnaissance" },
+          { id: "web-pentesting/10-methodology/mapping-attack-surface",   title: "Mapping Attack Surface" },
+          { id: "web-pentesting/10-methodology/fuzzing",                  title: "Fuzzing" },
+          { id: "web-pentesting/10-methodology/bug-bounty-methodology",   title: "Bug Bounty Methodology" }
+        ]
+      },
+      {
+        phase: "11 — Post-Exploitation",
+        notes: [
+          { id: "web-pentesting/11-post-exploitation/data-extraction",          title: "Data Extraction" },
+          { id: "web-pentesting/11-post-exploitation/chaining-vulnerabilities", title: "Chaining Vulnerabilities" }
+        ]
+      },
+      {
+        phase: "12 — Reporting",
+        notes: [
+          { id: "web-pentesting/12-reporting/writing-pentest-reports",  title: "Writing Pentest Reports" },
+          { id: "web-pentesting/12-reporting/vulnerability-reporting",  title: "Vulnerability Disclosure" },
+          { id: "web-pentesting/12-reporting/cvss",                     title: "CVSS Scoring" }
+        ]
+      }
+    ]
+  },
+
+  "Penetration Testing": {
+    icon: "🎯",
+    color: "#f78166",
+    phases: [
+      {
+        phase: "01 — Methodology",
+        notes: [
+          { id: "pentesting/01-methodology/pentest-methodology", title: "Pentest Methodology" }
+        ]
+      },
+      {
+        phase: "02 — Reconnaissance",
+        notes: [
+          { id: "pentesting/02-recon/reconnaissance", title: "Reconnaissance" }
+        ]
+      },
+      {
+        phase: "03 — Scanning",
+        notes: [
+          { id: "pentesting/03-scanning/scanning", title: "Scanning & Enumeration" }
+        ]
+      },
+      {
+        phase: "04 — Enumeration",
+        notes: [
+          { id: "pentesting/04-enumeration/enumeration", title: "Service Enumeration" }
+        ]
+      },
+      {
+        phase: "05 — Exploitation",
+        notes: [
+          { id: "pentesting/05-exploitation/exploitation", title: "Exploitation" }
+        ]
+      },
+      {
+        phase: "06 — Post-Exploitation",
+        notes: [
+          { id: "pentesting/06-post-exploitation/post-exploitation", title: "Post-Exploitation" }
+        ]
+      }
+    ]
+  },
+
+  "Red Teaming": {
+    icon: "🔴",
+    color: "#f78166",
+    phases: [
+      {
+        phase: "01 — Methodology",
+        notes: [{ id: "red-teaming/01-methodology/red-team-methodology", title: "Red Team Methodology" }]
+      },
+      {
+        phase: "02 — Initial Access",
+        notes: [{ id: "red-teaming/02-initial-access/initial-access", title: "Initial Access TTPs" }]
+      },
+      {
+        phase: "03 — C2 Infrastructure",
+        notes: [{ id: "red-teaming/03-c2/c2-infrastructure", title: "C2 Infrastructure" }]
+      },
+      {
+        phase: "04 — Lateral Movement",
+        notes: [{ id: "red-teaming/04-lateral-movement/lateral-movement", title: "Lateral Movement" }]
+      },
+      {
+        phase: "05 — Persistence",
+        notes: [{ id: "red-teaming/05-persistence/persistence", title: "Persistence Techniques" }]
+      },
+      {
+        phase: "06 — Evasion",
+        notes: [{ id: "red-teaming/06-evasion/evasion", title: "AV/EDR Evasion" }]
+      }
+    ]
+  },
+
+  "Cloud Security": {
+    icon: "☁️",
+    color: "#bc8cff",
+    phases: [
+      {
+        phase: "01 — AWS",
+        notes: [{ id: "cloud-security/01-aws/aws-security", title: "AWS Security & Attacks" }]
+      },
+      {
+        phase: "04 — Containers",
+        notes: [{ id: "cloud-security/04-containers/container-security", title: "Container & K8s Security" }]
+      },
+      {
+        phase: "05 — IAM",
+        notes: [{ id: "cloud-security/05-iam/iam-exploitation", title: "IAM Exploitation" }]
+      },
+      {
+        phase: "06 — Misconfigurations",
+        notes: [{ id: "cloud-security/06-misconfig/misconfigurations", title: "Cloud Misconfigurations" }]
+      }
+    ]
+  },
+
+  "API Pentesting": {
+    icon: "🔌",
+    color: "#39d353",
+    phases: [
+      {
+        phase: "01 — Foundations",
+        notes: [{ id: "api-pentesting/01-foundations/api-fundamentals", title: "API Fundamentals" }]
+      },
+      {
+        phase: "02 — REST API",
+        notes: [{ id: "api-pentesting/02-rest/rest-pentesting", title: "REST API Pentesting" }]
+      },
+      {
+        phase: "03 — GraphQL",
+        notes: [{ id: "api-pentesting/03-graphql/graphql-pentesting", title: "GraphQL Pentesting" }]
+      },
+      {
+        phase: "04 — Vulnerabilities",
+        notes: [{ id: "api-pentesting/04-vulnerabilities/owasp-api-top10", title: "OWASP API Top 10" }]
+      },
+      {
+        phase: "05 — Methodology",
+        notes: [{ id: "api-pentesting/05-methodology/api-methodology", title: "API Pentest Methodology" }]
+      }
+    ]
+  },
+
+  "Active Directory": {
+    icon: "🏛️",
+    color: "#e3b341",
+    phases: [
+      {
+        phase: "01 — Foundations",
+        notes: [{ id: "ad-pentesting/01-foundations/active-directory-basics", title: "Active Directory Basics" }]
+      },
+      {
+        phase: "02 — Enumeration",
+        notes: [{ id: "ad-pentesting/02-enumeration/ad-enumeration", title: "AD Enumeration" }]
+      },
+      {
+        phase: "03 — Core Attacks",
+        notes: [{ id: "ad-pentesting/03-attacks/ad-attacks", title: "Core AD Attacks" }]
+      },
+      {
+        phase: "04 — Lateral Movement",
+        notes: [{ id: "ad-pentesting/04-lateral-movement/ad-lateral-movement", title: "AD Lateral Movement" }]
+      },
+      {
+        phase: "05 — Persistence",
+        notes: [{ id: "ad-pentesting/05-persistence/ad-persistence", title: "AD Persistence" }]
+      },
+      {
+        phase: "06 — Privilege Escalation",
+        notes: [{ id: "ad-pentesting/06-escalation/privilege-escalation", title: "Domain Privilege Escalation" }]
+      }
+    ]
+  }
+};
+
+// Category → folder mapping (flat, for search)
+const CAT_FOLDER = {
+  "Web Pentesting":    "web-pentesting",
+  "Penetration Testing": "pentesting",
+  "Red Teaming":       "red-teaming",
+  "Cloud Security":    "cloud-security",
+  "API Pentesting":    "api-pentesting",
+  "Active Directory":  "ad-pentesting"
+};
+
+// Flat notes list for search
+function getAllNotes() {
+  const all = [];
+  Object.entries(NAV).forEach(([cat, data]) => {
+    data.phases.forEach(phase => {
+      phase.notes.forEach(note => {
+        all.push({ ...note, category: cat, phase: phase.phase });
+      });
+    });
+  });
+  return all;
+}

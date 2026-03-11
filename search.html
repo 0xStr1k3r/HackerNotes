@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search — HackerNotes</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <a class="header-logo" href="index.html">
+      <span class="logo-icon">💀</span>
+      <span>HackerNotes</span>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html">Home</a>
+      <a href="paths.html">Paths</a>
+      <a href="search.html">Search</a>
+      <a href="contributors/contributing.md">Contribute</a>
+      <a href="https://github.com" target="_blank">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <div class="search-wrapper" style="margin-top:80px">
+    <h1>🔎 Search Notes</h1>
+    <p style="color:var(--text-secondary);margin-bottom:24px">Full-text search across all notes. Press <kbd style="background:var(--bg-tertiary);border:1px solid var(--border-color);padding:2px 7px;border-radius:4px;font-size:12px">/</kbd> anywhere to open search.</p>
+
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search techniques, vulnerabilities, tools…"
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
+
+    <div id="search-status" style="font-size:12px;color:var(--text-muted);margin-bottom:16px"></div>
+    <div id="search-results"></div>
+  </div>
+
+  <!-- Dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
+
+  <!-- App scripts -->
+  <script src="data/navigation.json"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/search.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', initSearch);
+  </script>
+</body>
+</html>

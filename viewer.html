@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Note Viewer — HackerNotes</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <!-- Syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <a class="header-logo" href="index.html">
+      <span class="logo-icon">💀</span>
+      <span>HackerNotes</span>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html">Home</a>
+      <a href="paths.html">Paths</a>
+      <a href="search.html">Search</a>
+      <a href="contributors/contributing.md">Contribute</a>
+      <a href="https://github.com" target="_blank">GitHub ↗</a>
+    </nav>
+    <button id="sidebar-toggle" style="margin-left:12px;background:var(--bg-tertiary);border:1px solid var(--border-color);color:var(--text-secondary);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:16px">☰</button>
+  </header>
+
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div id="sidebar-nav"></div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" id="breadcrumb"></nav>
+
+      <!-- Note container -->
+      <div id="md-container">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Dependencies (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-http.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+  <!-- App scripts -->
+  <script src="data/navigation.json"></script>
+  <script src="assets/js/diagram-engine.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/markdown-loader.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    const notePath = getNoteFromURL();
+    buildSidebar('sidebar-nav', notePath);
+    buildBreadcrumb(notePath);
+    if (notePath) {
+      loadNote(notePath);
+    } else {
+      document.getElementById('md-container').innerHTML = `
+        <div class="md-content">
+          <h1>Select a Note</h1>
+          <p>Choose a topic from the sidebar or <a href="paths.html">browse all paths</a>.</p>
+        </div>`;
+    }
+  </script>
+</body>
+</html>
