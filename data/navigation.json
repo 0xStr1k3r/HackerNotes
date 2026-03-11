@@ -140,9 +140,24 @@ const NAV = {
     color: "#f78166",
     phases: [
       {
-        phase: "01 — Methodology",
+        phase: "01 — Fundamentals",
         notes: [
-          { id: "pentesting/01-methodology/pentest-methodology", title: "Pentest Methodology" }
+          { id: "pentesting/01-fundamentals/what-is-pentesting",          title: "What is Pentesting?" },
+          { id: "pentesting/01-fundamentals/types-of-pentesting",         title: "Types of Pentesting" },
+          { id: "pentesting/01-fundamentals/ethical-hacking-vs-pentesting", title: "Ethical Hacking vs Pentesting" },
+          { id: "pentesting/01-fundamentals/legal-considerations",        title: "Legal Considerations" },
+          { id: "pentesting/01-fundamentals/rules-of-engagement",         title: "Rules of Engagement" },
+          { id: "pentesting/01-fundamentals/pentesting-engagement-model", title: "Pentesting Engagement Model" }
+        ]
+      },
+      {
+        phase: "02 — Methodologies",
+        notes: [
+          { id: "pentesting/02-methodologies/ptes-framework",          title: "PTES Framework" },
+          { id: "pentesting/02-methodologies/nist-testing-framework",  title: "NIST Testing Framework" },
+          { id: "pentesting/02-methodologies/owasp-testing-methodology", title: "OWASP Testing Methodology" },
+          { id: "pentesting/02-methodologies/red-team-vs-pentest",     title: "Red Team vs Pentest" },
+          { id: "pentesting/02-methodologies/purple-team-model",       title: "Purple Team Model" }
         ]
       },
       {
