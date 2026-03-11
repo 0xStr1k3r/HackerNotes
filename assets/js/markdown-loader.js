@@ -1,119 +1,211 @@
-// ===== HACKERNOTES - MARKDOWN LOADER =====
-'use strict';
+/* markdown-loader.js — Load/render notes in viewer.html */
+(function() {
+  'use strict';
 
-// Configure marked renderer (Mermaid + syntax highlight)
-const renderer = new marked.Renderer();
-const origCode  = renderer.code.bind(renderer);
+  const params  = new URLSearchParams(window.location.search);
+  const noteId  = params.get('note');
 
-renderer.code = function(code, lang) {
-  if (lang === 'mermaid') {
-    const id = 'mermaid-' + Math.random().toString(36).substr(2,8);
-    return `<div class="diagram-wrap"><div class="mermaid" id="${id}">${escapeHtml(code)}</div></div>`;
+  if (!noteId) { showError(); return; }
+
+  // Update breadcrumb
+  const nav = document.getElementById('breadcrumb-nav');
+  if (nav) {
+    const parts  = noteId.split('/');
+    const folder = parts[0];
+    let catName  = folder;
+    for (const [name] of Object.entries(NAV)) {
+      if (CAT_FOLDER[name] === folder) { catName = name; break; }
+    }
+    nav.innerHTML = `
+      <a href="index.html">Home</a>
+      <span style="color:var(--text-muted);padding:0 6px">›</span>
+      <a href="path.html?p=${folder}">${catName}</a>
+      <span style="color:var(--text-muted);padding:0 6px">›</span>
+      <span style="color:var(--text-secondary)">${parts[parts.length-1].replace(/-/g,' ')}</span>`;
   }
-  // Wrap pre in div for copy button
-  const highlighted = (lang && Prism.languages[lang])
-    ? Prism.highlight(code, Prism.languages[lang], lang)
-    : escapeHtml(code);
-  return `<div class="pre-wrap">
-    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-    <pre><code class="language-${lang || 'text'}">${highlighted}</code></pre>
-  </div>`;
-};
 
-marked.use({ renderer, breaks: true, gfm: true });
+  // ── Configure Marked (v9 compatible) ────────────────────────────
+  const renderer = new marked.Renderer();
 
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, c =>
-    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
+  // Code block renderer — compatible with both marked v8 and v9
+  renderer.code = function(codeOrToken, lang) {
+    // v9 passes a token object; v8 passes (code, lang)
+    let code = codeOrToken, language = lang || 'text';
+    if (typeof codeOrToken === 'object' && codeOrToken !== null) {
+      code     = codeOrToken.text || '';
+      language = codeOrToken.lang || 'text';
+    }
+    language = (language || 'text').split(/\s/)[0]; // strip extra attrs
 
-// Copy button handler
-window.copyCode = function(btn) {
-  const code = btn.nextElementSibling.querySelector('code').innerText;
-  navigator.clipboard.writeText(code).then(() => {
-    btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy', 1500);
-  });
-};
+    let highlighted = escapeHtml(code);
+    try {
+      if (language && Prism.languages[language]) {
+        highlighted = Prism.highlight(code, Prism.languages[language], language);
+      }
+    } catch(e) { highlighted = escapeHtml(code); }
 
-// ---- Load a note ----
-async function loadNote(path) {
-  const container = document.getElementById('md-container');
-  if (!container) return;
-  container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+    return `<div class="code-block-wrap">
+      <span class="code-lang-label">${language}</span>
+      <button class="copy-btn" onclick="HN.copyCode(this)">Copy</button>
+      <pre class="language-${language}"><code class="language-${language}">${highlighted}</code></pre>
+    </div>`;
+  };
 
-  try {
-    const res = await fetch(`notes/${path}.md`);
-    if (!res.ok) throw new Error('not found');
-    const raw  = await res.text();
-    const dirty = marked.parse(raw);
-    const clean = DOMPurify.sanitize(dirty, { ADD_TAGS: ['div','span'], ADD_ATTR: ['class','id','onclick'] });
+  marked.use({ renderer, breaks: true, gfm: true });
 
-    container.innerHTML = `<div class="md-content">${buildTOC(raw)}${clean}</div>${buildNoteNav(path)}`;
+  // ── Fetch and render ─────────────────────────────────────────────
+  fetch(`notes/${noteId}.md`)
+    .then(r => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.text();
+    })
+    .then(md => renderNote(md))
+    .catch(err => {
+      console.error('Note load failed:', err);
+      showError();
+    });
 
-    // Mermaid
-    if (typeof mermaid !== 'undefined') {
-      mermaid.init(undefined, container.querySelectorAll('.mermaid:not([data-processed])'));
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function renderNote(md) {
+    const loading = document.getElementById('loading-state');
+    const wrap    = document.getElementById('note-wrap');
+    const body    = document.getElementById('note-body');
+    if (!body) return;
+
+    // Parse markdown
+    let html;
+    try {
+      html = marked.parse(md);
+    } catch(e) {
+      console.error('Marked parse error:', e);
+      html = '<pre>' + escapeHtml(md) + '</pre>';
     }
 
-    const h1 = container.querySelector('h1');
+    // Sanitize
+    if (typeof DOMPurify !== 'undefined') {
+      html = DOMPurify.sanitize(html, {
+        ADD_TAGS: ['pre','code'],
+        ADD_ATTR: ['class','id','onclick'],
+        FORCE_BODY: true
+      });
+    }
+
+    body.innerHTML = html;
+
+    // Add slugified IDs to headings
+    body.querySelectorAll('h1,h2,h3,h4').forEach((h, i) => {
+      if (!h.id) {
+        const slug = h.textContent
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '') || `h-${i}`;
+        h.id = slug;
+      }
+    });
+
+    // Auto-hide sidebar if in autohide mode
+    if (window.HN && window.HN.getSidebarMode && window.HN.getSidebarMode() === 'autohide') {
+      const sidebar = document.getElementById('viewer-sidebar');
+      const peek    = document.getElementById('sidebar-peek');
+      if (sidebar) sidebar.classList.add('hidden');
+      if (peek)    peek.classList.add('visible');
+    }
+
+    // Build sidebar
+    if (window.HN) {
+      if (window.HN.buildSidebar) window.HN.buildSidebar(noteId);
+    }
+
+    // Prev/next nav
+    buildNoteNav();
+
+    // Mermaid diagrams
+    if (typeof mermaid !== 'undefined') {
+      try {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default',
+          securityLevel: 'loose'
+        });
+        const diagrams = body.querySelectorAll('code.language-mermaid');
+        diagrams.forEach(el => {
+          const pre = el.closest('pre') || el.parentElement;
+          const wrap = pre.closest('.code-block-wrap') || pre;
+          const div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = el.textContent;
+          wrap.replaceWith(div);
+        });
+        mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+      } catch(e) { console.warn('Mermaid error:', e); }
+    }
+
+    // Show content
+    if (loading) loading.hidden = true;
+    if (wrap)    wrap.hidden = false;
+
+    // Page title from first H1
+    const h1 = body.querySelector('h1');
     if (h1) document.title = h1.textContent + ' — HackerNotes';
-
-  } catch (_) {
-    container.innerHTML = `
-      <div class="md-content">
-        <h1>Note Not Found</h1>
-        <p>The note <code>${path}</code> hasn't been written yet.</p>
-        <p><a href="contributors/note-template.md">Want to contribute it?</a></p>
-      </div>`;
   }
-}
 
-// Build simple TOC from h2 headings
-function buildTOC(markdown) {
-  const headings = [...markdown.matchAll(/^##\s+(.+)$/gm)].map(m => m[1]);
-  if (headings.length < 3) return '';
-  const items = headings.map(h => {
-    const anchor = h.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g,'');
-    return `<a href="#${anchor}">${h.replace(/[🧠🏗️📊⚙️🔴🛠️💥🔍🛡️📚]/gu,'').trim()}</a>`;
-  }).join('');
-  return `<div class="toc"><h4>📋 Contents</h4>${items}</div>`;
-}
+  function buildNoteNav() {
+    const navEl = document.getElementById('note-nav');
+    if (!navEl) return;
+    const all  = getAllNotes();
+    const idx  = all.findIndex(n => n.id === noteId);
+    if (idx < 0) return;
 
-// Prev/next note navigation
-function buildNoteNav(currentPath) {
-  const all = getAllNotes();
-  const idx = all.findIndex(n => n.id === currentPath);
-  if (idx === -1) return '';
-  const prev = all[idx - 1];
-  const next = all[idx + 1];
-  let html = '<div class="note-nav">';
-  html += prev
-    ? `<a class="prev" href="viewer.html?note=${prev.id}">← <span class="nav-title">${prev.title}</span></a>`
-    : '<span></span>';
-  html += next
-    ? `<a class="next" href="viewer.html?note=${next.id}"><span class="nav-title">${next.title}</span> →</a>`
-    : '';
-  html += '</div>';
-  return html;
-}
+    const prev = idx > 0             ? all[idx - 1] : null;
+    const next = idx < all.length-1  ? all[idx + 1] : null;
 
-function getNoteFromURL() {
-  return new URLSearchParams(window.location.search).get('note');
-}
+    navEl.innerHTML = '';
+    if (prev) {
+      const a = document.createElement('a');
+      a.href = `viewer.html?note=${prev.id}`;
+      a.innerHTML = `<div class="prev-label">← Previous</div><div class="note-title">${prev.title}</div>`;
+      navEl.appendChild(a);
+    } else {
+      navEl.appendChild(document.createElement('span'));
+    }
+    if (next) {
+      const a = document.createElement('a');
+      a.href = `viewer.html?note=${next.id}`;
+      a.className = 'next-link';
+      a.innerHTML = `<div class="next-label">Next →</div><div class="note-title">${next.title}</div>`;
+      navEl.appendChild(a);
+    }
+  }
 
-function buildBreadcrumb(path) {
-  const el = document.getElementById('breadcrumb');
-  if (!el || !path) return;
-  const note = getAllNotes().find(n => n.id === path);
-  if (!note) return;
-  el.innerHTML = `
-    <a href="index.html">Home</a>
-    <span>›</span>
-    <a href="paths.html">${note.category}</a>
-    <span>›</span>
-    <span>${note.phase}</span>
-    <span>›</span>
-    <span>${note.title}</span>
-  `;
-}
+  function showError() {
+    const loading = document.getElementById('loading-state');
+    const errEl   = document.getElementById('error-state');
+    if (loading) loading.hidden = true;
+    if (errEl)   errEl.hidden   = false;
+  }
+
+  // Copy code handler
+  window.HN = window.HN || {};
+  window.HN.copyCode = function(btn) {
+    const code = btn.parentElement.querySelector('code');
+    if (!code) return;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+    }).catch(() => {
+      // Fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = code.textContent;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
+    });
+  };
+})();

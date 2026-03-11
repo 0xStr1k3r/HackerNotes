@@ -1,98 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HackerNotes — Cybersecurity Knowledge Base</title>
-  <meta name="description" content="Deep technical cybersecurity notes — web pentesting, red teaming, cloud security, AD attacks, API security and more."/>
+  <meta name="description" content="Deep technical cybersecurity notes — web pentesting, red teaming, cloud security, AD attacks, API security."/>
   <link rel="stylesheet" href="assets/css/main.css"/>
 </head>
 <body>
+  <!-- HEADER -->
   <header class="header">
-    <a class="header-logo" href="index.html"><span class="logo-icon">💀</span><span>HackerNotes</span></a>
+    <a class="header-logo" href="index.html">
+      <span class="skull">💀</span>
+      <span>HackerNotes</span>
+    </a>
+    <div class="header-divider"></div>
     <nav class="header-nav">
       <a href="index.html" class="active">Home</a>
-      <a href="paths.html">Paths</a>
       <a href="search.html">Search</a>
-      <a href="https://github.com" target="_blank">GitHub ↗</a>
     </nav>
+    <div class="header-right">
+      <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
+      <a href="https://github.com" target="_blank" class="header-btn">GitHub ↗</a>
+    </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-badge">⚡ Open Source · Deep Technical Notes</div>
-    <h1>The Hacker's<br>Knowledge Base</h1>
-    <p>Comprehensive cybersecurity notes from foundations to advanced exploitation. No fluff — pure methodology, techniques, and depth.</p>
-    <div class="hero-actions">
-      <a href="paths.html" class="btn-primary">📚 Start Learning</a>
-      <a href="search.html" class="btn-secondary">🔎 Search Notes</a>
-    </div>
-    <p style="margin-top:16px;font-size:13px;color:var(--text-muted)">Press <kbd style="background:var(--bg-tertiary);border:1px solid var(--border-color);padding:2px 7px;border-radius:4px">/</kbd> anywhere to search</p>
-  </section>
+  <div class="home-wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-eyebrow"><span class="dot"></span> Open Source · Community Driven</div>
+      <h1>The Hacker's<br>Knowledge Base</h1>
+      <p class="hero-sub">Deep technical cybersecurity notes from foundations to advanced exploitation. No fluff — pure methodology, real techniques, full depth.</p>
+      <div class="hero-cta">
+        <a href="#paths" class="btn-primary">📚 Explore Paths</a>
+        <a href="search.html" class="btn-ghost">🔎 Search Notes</a>
+      </div>
+      <p class="hero-hint">Press <kbd>/</kbd> to search instantly</p>
+    </section>
 
-  <!-- STATS BAR -->
-  <div style="display:flex;justify-content:center;gap:48px;padding:20px 0 40px;border-bottom:1px solid var(--border-color);margin:0 40px">
-    <div style="text-align:center">
-      <div id="stat-notes" style="font-size:28px;font-weight:800;color:var(--accent-green)">0</div>
-      <div style="font-size:13px;color:var(--text-muted)">Notes</div>
+    <!-- STATS -->
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat-item"><div class="stat-num" id="stat-notes">0</div><div class="stat-label">Notes</div></div>
+      <div class="stat-item"><div class="stat-num" id="stat-paths">6</div><div class="stat-label">Paths</div></div>
+      <div class="stat-item"><div class="stat-num" id="stat-phases">42</div><div class="stat-label">Phases</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Free</div></div>
     </div>
-    <div style="text-align:center">
-      <div id="stat-paths" style="font-size:28px;font-weight:800;color:var(--accent-cyan)">6</div>
-      <div style="font-size:13px;color:var(--text-muted)">Paths</div>
+
+    <!-- PATHS -->
+    <div class="section-header" id="paths">
+      <div>
+        <h2>Learning Paths</h2>
+        <p>Structured from fundamentals to expert-level exploitation</p>
+      </div>
     </div>
-    <div style="text-align:center">
-      <div style="font-size:28px;font-weight:800;color:var(--accent-purple)">100%</div>
-      <div style="font-size:13px;color:var(--text-muted)">Free</div>
-    </div>
-    <div style="text-align:center">
-      <div style="font-size:28px;font-weight:800;color:var(--accent-yellow)">∞</div>
-      <div style="font-size:13px;color:var(--text-muted)">Depth</div>
-    </div>
+    <div class="paths-grid" id="paths-grid"></div>
   </div>
 
-  <!-- PATH CARDS -->
-  <div class="paths-grid" id="home-cards"></div>
-
   <script src="data/navigation.json"></script>
-  <script src="assets/js/navigation.js"></script>
   <script src="assets/js/app.js"></script>
   <script>
-    const descriptions = {
-      "Web Pentesting":    "Complete web app pentesting: HTTP, auth, XSS, SQLi, SSRF, SSTI, API attacks and full methodology.",
-      "Penetration Testing": "Network pentesting: recon, scanning, enumeration, exploitation, post-exploitation and reporting.",
-      "Red Teaming":       "Adversary simulation: C2 infra, initial access, lateral movement, persistence and EDR evasion.",
-      "Cloud Security":    "AWS/Azure/GCP attacks, IAM exploitation, container escapes, cloud misconfigurations.",
-      "API Pentesting":    "REST, GraphQL, gRPC security: BOLA, mass assignment, rate limiting, auth bypass.",
-      "Active Directory":  "AD attacks: Kerberoasting, AS-REP roasting, DCSync, Golden Ticket, AD CS exploitation."
+    const DESCRIPTIONS = {
+      "Web Pentesting":    "Complete web app pentesting — HTTP, auth, XSS, SQLi, SSRF, SSTI, API attacks and full methodology across 12 phases.",
+      "Penetration Testing": "Network pentesting lifecycle — recon, scanning, enumeration, exploitation and post-exploitation.",
+      "Red Teaming":       "Adversary simulation — C2 infra, initial access, lateral movement, persistence and EDR evasion.",
+      "Cloud Security":    "AWS/Azure/GCP attacks, IAM exploitation, container escapes and cloud misconfigurations.",
+      "API Pentesting":    "REST, GraphQL, gRPC security — BOLA, mass assignment, rate limiting and auth bypass.",
+      "Active Directory":  "AD attacks — Kerberoasting, AS-REP roasting, DCSync, Golden Ticket and AD CS exploitation."
     };
 
-    const grid = document.getElementById('home-cards');
-    let totalNotes = 0;
+    const grid = document.getElementById('paths-grid');
+    let totalNotes = 0, totalPhases = 0;
 
     Object.entries(NAV).forEach(([cat, data]) => {
       const folder = CAT_FOLDER[cat];
-      const noteCount = data.phases.reduce((s, p) => s + p.notes.length, 0);
+      const noteCount = data.phases.reduce((s,p) => s + p.notes.length, 0);
       totalNotes += noteCount;
+      totalPhases += data.phases.length;
 
       const card = document.createElement('a');
       card.className = 'path-card';
-      card.href = `paths.html#${folder}`;
+      card.href = `path.html?p=${folder}`;
       card.innerHTML = `
-        <div class="path-card-icon">${data.icon}</div>
+        <div class="card-top">
+          <span class="card-icon">${data.icon}</span>
+          <span class="card-badge">${data.phases.length} phases</span>
+        </div>
         <h3>${cat}</h3>
-        <p>${descriptions[cat] || ''}</p>
-        <div class="topic-count">${noteCount} notes →</div>
-      `;
+        <p>${DESCRIPTIONS[cat]||''}</p>
+        <div class="card-footer">
+          <span class="card-count">${noteCount} notes</span>
+          <span class="card-arrow">→</span>
+        </div>`;
       grid.appendChild(card);
     });
 
-    // Animate note count
+    // Animate stats
+    document.getElementById('stat-phases').textContent = totalPhases;
     const el = document.getElementById('stat-notes');
-    let count = 0;
-    const interval = setInterval(() => {
-      count = Math.min(count + Math.ceil(totalNotes / 30), totalNotes);
-      el.textContent = count;
-      if (count >= totalNotes) clearInterval(interval);
-    }, 40);
+    let c = 0, step = Math.ceil(totalNotes/40);
+    const t = setInterval(() => {
+      c = Math.min(c+step, totalNotes);
+      el.textContent = c;
+      if(c>=totalNotes) clearInterval(t);
+    }, 30);
   </script>
 </body>
 </html>

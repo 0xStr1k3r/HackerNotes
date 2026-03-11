@@ -1,73 +1,94 @@
-// ===== HACKERNOTES - NAVIGATION BUILDER =====
-'use strict';
+/* navigation.js — Build phased sidebar for viewer.html */
+(function() {
+  'use strict';
 
-function buildSidebar(containerId, activePath) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.innerHTML = '';
+  function buildSidebar(activeNoteId) {
+    const container = document.getElementById('sidebar-content');
+    const pathLabel = document.getElementById('sidebar-path-name');
+    if (!container) return;
 
-  Object.entries(NAV).forEach(([category, data]) => {
-    const catSection = document.createElement('div');
-    catSection.className = 'sidebar-section';
+    // Determine which category/path we're in from activeNoteId
+    // e.g. "web-pentesting/01-foundations/dns"
+    const pathFolder = activeNoteId ? activeNoteId.split('/')[0] : null;
 
-    // Category header
-    const catEl = document.createElement('div');
-    catEl.className = 'sidebar-category';
-    catEl.innerHTML = `
-      <span class="cat-icon">${data.icon}</span>
-      <span>${category}</span>
-      <span class="arrow">▾</span>
-    `;
+    let catName = null, catData = null;
+    for (const [name, data] of Object.entries(NAV)) {
+      if (CAT_FOLDER[name] === pathFolder) { catName = name; catData = data; break; }
+    }
+    if (!catData) return;
 
-    const phasesWrap = document.createElement('div');
-    phasesWrap.className = 'sidebar-phases';
+    if (pathLabel) pathLabel.textContent = catName;
 
-    // Check if active path belongs to this category
-    const folder = CAT_FOLDER[category];
-    const isActiveCategory = activePath && activePath.startsWith(folder + '/');
-    if (!isActiveCategory) phasesWrap.classList.add('hidden');
+    catData.phases.forEach((phase, pi) => {
+      const hasActive = phase.notes.some(n => n.id === activeNoteId);
 
-    data.phases.forEach(phase => {
-      const phaseEl = document.createElement('div');
-      phaseEl.className = 'sidebar-phase';
+      const group  = document.createElement('div');
+      group.className = 'sb-phase-group';
 
-      const phaseLabelEl = document.createElement('div');
-      phaseLabelEl.className = 'sidebar-phase-label';
-      phaseLabelEl.textContent = phase.phase;
+      const title = document.createElement('div');
+      title.className = 'sb-phase-title' + (hasActive ? ' open' : '');
+      title.innerHTML = `<span>${phase.phase}</span><span class="sb-arrow">›</span>`;
 
-      const linksEl = document.createElement('div');
-      linksEl.className = 'sidebar-links';
+      const notesList = document.createElement('div');
+      notesList.className = 'sb-phase-notes' + (hasActive ? ' open' : '');
 
       phase.notes.forEach(note => {
         const a = document.createElement('a');
+        a.className = 'sb-note-link' + (note.id === activeNoteId ? ' active' : '');
         a.href = `viewer.html?note=${note.id}`;
-        a.textContent = note.title;
-        if (activePath && activePath === note.id) {
-          a.classList.add('active');
-        }
-        linksEl.appendChild(a);
+        a.innerHTML = `<span class="sb-dot"></span>${note.title}`;
+        notesList.appendChild(a);
       });
 
-      phaseEl.appendChild(phaseLabelEl);
-      phaseEl.appendChild(linksEl);
-      phasesWrap.appendChild(phaseEl);
+      title.addEventListener('click', () => {
+        const open = notesList.classList.toggle('open');
+        title.classList.toggle('open', open);
+      });
+
+      group.appendChild(title);
+      group.appendChild(notesList);
+      container.appendChild(group);
     });
 
-    catEl.addEventListener('click', () => {
-      catEl.classList.toggle('collapsed');
-      phasesWrap.classList.toggle('hidden');
-    });
-
-    catSection.appendChild(catEl);
-    catSection.appendChild(phasesWrap);
-    container.appendChild(catSection);
-  });
-}
-
-function initMobileSidebar() {
-  const toggle = document.getElementById('sidebar-toggle');
-  const sidebar = document.getElementById('sidebar');
-  if (toggle && sidebar) {
-    toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+    // Scroll active link into view
+    setTimeout(() => {
+      const active = container.querySelector('.sb-note-link.active');
+      if (active) active.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }, 100);
   }
-}
+
+  // TOC builder
+  function buildTOC(contentEl) {
+    const tocList = document.getElementById('toc-list');
+    if (!tocList) return;
+
+    const headings = contentEl.querySelectorAll('h2, h3');
+    if (!headings.length) return;
+
+    headings.forEach((h, i) => {
+      if (!h.id) h.id = 'h-' + i;
+      const a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      a.className = h.tagName === 'H2' ? 'toc-h2' : 'toc-h3';
+      tocList.appendChild(a);
+    });
+
+    // Highlight active heading on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          tocList.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+          const active = tocList.querySelector(`a[href="#${e.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-60px 0px -70% 0px' });
+
+    headings.forEach(h => observer.observe(h));
+  }
+
+  window.HN = window.HN || {};
+  window.HN.buildSidebar = buildSidebar;
+  window.HN.buildTOC     = buildTOC;
+})();

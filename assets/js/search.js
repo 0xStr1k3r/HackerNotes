@@ -1,95 +1,54 @@
-// ===== HACKERNOTES - SEARCH =====
-'use strict';
+/* search.js — Lunr full-text search */
+(function() {
+  'use strict';
 
-let lunrIndex = null;
-let docsMap   = {};
+  const notes  = getAllNotes();
+  let   idx    = null;
 
-async function buildSearchIndex() {
-  const allNotes = getAllNotes();
-  const docs = [];
-
-  for (const note of allNotes) {
-    try {
-      const res = await fetch(`notes/${note.id}.md`);
-      if (!res.ok) continue;
-      const text = await res.text();
-      const doc = {
-        id:       note.id,
-        title:    note.title,
-        category: note.category,
-        phase:    note.phase,
-        body:     text.replace(/```[\s\S]*?```/g,'').replace(/[#*`>_\[\]]/g,' ').substring(0, 3000)
-      };
-      docs.push(doc);
-      docsMap[doc.id] = doc;
-    } catch (_) {}
-  }
-
-  lunrIndex = lunr(function() {
+  // Build index
+  const idxData = lunr(function() {
     this.ref('id');
-    this.field('title',    { boost: 15 });
-    this.field('category', { boost: 5  });
-    this.field('phase',    { boost: 3  });
-    this.field('body');
-    docs.forEach(d => this.add(d));
+    this.field('title', { boost: 10 });
+    this.field('path');
+    notes.forEach(n => this.add(n));
   });
 
-  return docs.length;
-}
-
-function runSearch(query) {
-  if (!lunrIndex || !query.trim()) return [];
-  try {
-    return lunrIndex.search(query + '~1 ' + query + '*');
-  } catch(_) {
-    try { return lunrIndex.search(query); } catch(_) { return []; }
-  }
-}
-
-function renderResults(query, results, container) {
-  if (!results.length) {
-    container.innerHTML = `<p style="color:var(--text-muted);text-align:center;padding:40px 0">No results for "<strong>${esc(query)}</strong>"</p>`;
-    return;
-  }
-  container.innerHTML = results.slice(0,20).map(r => {
-    const doc = docsMap[r.ref];
-    if (!doc) return '';
-    const re  = new RegExp(`(${esc(query)})`, 'gi');
-    const excerpt = doc.body.replace(re,'<mark>$1</mark>').substring(0,180);
-    return `
-      <a class="search-result" href="viewer.html?note=${doc.id}">
-        <div class="result-title">${esc(doc.title)}</div>
-        <div class="result-path">${esc(doc.category)} › ${esc(doc.phase)}</div>
-        <div class="result-excerpt">${excerpt}…</div>
-      </a>`;
-  }).join('');
-}
-
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-async function initSearch() {
   const input   = document.getElementById('search-input');
   const results = document.getElementById('search-results');
-  const status  = document.getElementById('search-status');
-  if (!input) return;
 
-  status.textContent = '⏳ Building search index…';
-  const count = await buildSearchIndex();
-  status.textContent = `✅ ${count} notes indexed. Start typing to search.`;
+  function render(query) {
+    results.innerHTML = '';
+    if (!query || query.length < 2) { return; }
+    let hits;
+    try {
+      hits = idxData.search(query + '*');
+    } catch(e) {
+      hits = idxData.search(query);
+    }
+    if (!hits.length) {
+      results.innerHTML = '<div class="search-empty">No results found for "' + query + '"</div>';
+      return;
+    }
+    hits.slice(0, 30).forEach(hit => {
+      const note = notes.find(n => n.id === hit.ref);
+      if (!note) return;
+      const div  = document.createElement('div');
+      div.className = 'search-result';
+      const parts = note.id.split('/');
+      const cat   = parts[0].replace(/-/g, ' ');
+      const phase = parts.length > 1 ? parts[1].replace(/^\d+-/, '').replace(/-/g, ' ') : '';
+      div.innerHTML = `
+        <div class="result-title">${note.title}</div>
+        <div class="result-path">${cat} › ${phase}</div>`;
+      div.addEventListener('click', () => window.location.href = `viewer.html?note=${note.id}`);
+      results.appendChild(div);
+    });
+  }
 
-  let timer;
-  input.addEventListener('input', () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      const q = input.value.trim();
-      if (!q) { results.innerHTML = ''; return; }
-      renderResults(q, runSearch(q), results);
-    }, 200);
-  });
-
-  input.focus();
-  const q = new URLSearchParams(window.location.search).get('q');
-  if (q) { input.value = q; renderResults(q, runSearch(q), results); }
-}
+  if (input) {
+    input.addEventListener('input', e => render(e.target.value.trim()));
+    // Auto-search if query param
+    const q = new URLSearchParams(window.location.search).get('q');
+    if (q) { input.value = q; render(q); }
+  }
+})();

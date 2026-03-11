@@ -1,49 +1,80 @@
-/* ===== HACKERNOTES THEME ===== */
+/* =============================================
+   HACKERNOTES THEME VARIABLES
+   Dark theme is default, light is secondary
+   ============================================= */
+
 :root {
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-tertiary: #21262d;
-  --border-color: #30363d;
-  --text-primary: #e6edf3;
-  --text-secondary: #8b949e;
-  --text-muted: #484f58;
-  --accent-green: #39d353;
-  --accent-cyan: #58a6ff;
-  --accent-orange: #f78166;
-  --accent-purple: #bc8cff;
-  --accent-yellow: #e3b341;
-  --code-bg: #161b22;
-  --sidebar-width: 260px;
-  --header-height: 60px;
+  --transition: 0.2s ease;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ── DARK THEME (default) ── */
+[data-theme="dark"] {
+  --bg:           #080a0f;
+  --bg-surface:   #0e1118;
+  --bg-elevated:  #141820;
+  --bg-card:      #10141c;
+  --border:       rgba(255,255,255,0.06);
+  --border-hover: rgba(99,179,237,0.30);
+
+  --text:         #dde3ed;
+  --text-secondary: #7a8a9a;
+  --text-muted:   #445060;
+
+  --accent:       #5ba3d9;
+  --accent-hover: #7fbfe8;
+  --accent-glow:  rgba(91,163,217,0.15);
+  --accent2:      #57c47a;
+
+  --danger:       #f47070;
+  --warn:         #e8a04a;
+  --info:         #6ad4ef;
+
+  --code-bg:      #060810;
+  --code-border:  rgba(255,255,255,0.08);
+  --scrollbar:    #1e2535;
+
+  --sidebar-bg:   #080b12;
+  --sidebar-border: rgba(255,255,255,0.05);
+
+  --header-bg:    rgba(8,10,15,0.95);
+  --header-border: rgba(255,255,255,0.06);
+
+  --hero-grad: linear-gradient(135deg, #080a0f 0%, #0d1220 50%, #080e1a 100%);
+  --card-grad: linear-gradient(145deg, #10141c, #0a0e16);
 }
 
-html {
-  scroll-behavior: smooth;
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  --bg:           #f5f7fa;
+  --bg-surface:   #ffffff;
+  --bg-elevated:  #edf2f7;
+  --bg-card:      #ffffff;
+  --border:       rgba(0,0,0,0.09);
+  --border-hover: rgba(49,130,206,0.35);
+
+  --text:         #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted:   #a0aec0;
+
+  --accent:       #3182ce;
+  --accent-hover: #2b6cb0;
+  --accent-glow:  rgba(49,130,206,0.12);
+  --accent2:      #38a169;
+
+  --danger:       #e53e3e;
+  --warn:         #dd6b20;
+  --info:         #3182ce;
+
+  --code-bg:      #f0f3f7;
+  --code-border:  rgba(0,0,0,0.1);
+  --scrollbar:    #cbd5e0;
+
+  --sidebar-bg:   #f8fafc;
+  --sidebar-border: rgba(0,0,0,0.07);
+
+  --header-bg:    rgba(245,247,250,0.95);
+  --header-border: rgba(0,0,0,0.08);
+
+  --hero-grad: linear-gradient(135deg, #f5f7fa 0%, #e8f0fe 50%, #f0f5ff 100%);
+  --card-grad: linear-gradient(145deg, #ffffff, #f7fafc);
 }
-
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
-
-/* Links */
-a { color: var(--accent-cyan); text-decoration: none; transition: color 0.2s; }
-a:hover { color: var(--accent-green); }
-
-/* Selection */
-::selection { background: rgba(88, 166, 255, 0.2); color: var(--text-primary); }

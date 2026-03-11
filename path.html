@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Path — HackerNotes</title>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <a class="header-logo" href="index.html"><span class="skull">💀</span><span>HackerNotes</span></a>
+    <div class="header-divider"></div>
+    <nav class="header-nav">
+      <a href="index.html">Home</a>
+      <a href="search.html">Search</a>
+    </nav>
+    <div class="header-right">
+      <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <div class="path-browser">
+    <!-- LEFT NAV PANEL -->
+    <aside class="path-nav-panel" id="path-nav">
+      <div class="path-nav-title">
+        <span id="nav-icon">📚</span>
+        <span id="nav-cat-name">Path</span>
+      </div>
+      <div id="phase-nav-list"></div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="path-main" id="path-main">
+      <!-- Path hero -->
+      <div class="path-hero">
+        <div class="path-hero-top">
+          <span class="path-hero-icon" id="hero-icon">📚</span>
+          <div>
+            <h1 id="hero-title">Loading…</h1>
+          </div>
+        </div>
+        <p id="hero-desc" style="color:var(--text-secondary);font-size:15px"></p>
+        <div class="path-progress-bar"><div class="path-progress-fill" id="progress-fill" style="width:0%"></div></div>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:6px" id="progress-label"></p>
+      </div>
+
+      <!-- Phase sections -->
+      <div id="phases-content"></div>
+    </main>
+  </div>
+
+  <script src="data/navigation.json"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    const params  = new URLSearchParams(window.location.search);
+    const pathKey = params.get('p'); // e.g. "web-pentesting"
+
+    // Find matching category
+    const catEntry = Object.entries(NAV).find(([,d]) => CAT_FOLDER[_catName(d)] === pathKey ||
+      Object.values(CAT_FOLDER).find(v => v === pathKey));
+
+    function _catName(d) { return d._catName||''; }
+
+    // Find by folder
+    let catName = null, catData = null;
+    for(const [name,data] of Object.entries(NAV)) {
+      if(CAT_FOLDER[name] === pathKey) { catName = name; catData = data; break; }
+    }
+
+    if(!catData) {
+      document.getElementById('hero-title').textContent = 'Path not found';
+    } else {
+      document.title = catName + ' — HackerNotes';
+
+      const DESCRIPTIONS = {
+        "Web Pentesting":    "Complete web app pentesting from HTTP fundamentals to advanced exploitation. 12 structured phases covering every attack surface.",
+        "Penetration Testing": "Full network pentesting lifecycle — from scope definition through recon, scanning, exploitation to professional reporting.",
+        "Red Teaming":       "Adversary simulation techniques used by professional red teams — C2 infrastructure, initial access, lateral movement and evasion.",
+        "Cloud Security":    "Attack and defend cloud environments — AWS, containers, IAM privilege escalation and cloud misconfiguration exploitation.",
+        "API Pentesting":    "Modern API security testing — REST, GraphQL, authentication bypass and the full OWASP API Security Top 10.",
+        "Active Directory":  "Complete Active Directory attack path — enumeration through domain dominance using real-world techniques."
+      };
+
+      document.getElementById('hero-icon').textContent = catData.icon;
+      document.getElementById('hero-title').textContent = catName;
+      document.getElementById('hero-desc').textContent  = DESCRIPTIONS[catName]||'';
+      document.getElementById('nav-icon').textContent   = catData.icon;
+      document.getElementById('nav-cat-name').textContent = catName;
+
+      const totalNotes = catData.phases.reduce((s,p) => s+p.notes.length, 0);
+      document.getElementById('progress-fill').style.width = '100%';
+      document.getElementById('progress-label').textContent = `${catData.phases.length} phases · ${totalNotes} notes`;
+
+      // Build left nav
+      const navList = document.getElementById('phase-nav-list');
+      catData.phases.forEach((phase, pi) => {
+        const grp  = document.createElement('div');
+        grp.className = 'phase-group';
+        const toggle = document.createElement('div');
+        toggle.className = 'phase-toggle' + (pi===0?' active open':'');
+        toggle.innerHTML = `<span>${phase.phase}</span><span class="ph-arrow">›</span>`;
+        const links = document.createElement('div');
+        links.className = 'phase-notes' + (pi===0?' open':'');
+        phase.notes.forEach(note => {
+          const a = document.createElement('a');
+          a.className = 'phase-note-link';
+          a.href = `viewer.html?note=${note.id}`;
+          a.innerHTML = `<span class="note-dot"></span>${note.title}`;
+          links.appendChild(a);
+        });
+        toggle.addEventListener('click', () => {
+          const open = links.classList.toggle('open');
+          toggle.classList.toggle('open', open);
+          toggle.classList.toggle('active', open);
+        });
+        grp.appendChild(toggle); grp.appendChild(links);
+        navList.appendChild(grp);
+      });
+
+      // Build phase sections
+      const content = document.getElementById('phases-content');
+      catData.phases.forEach((phase, pi) => {
+        const sec = document.createElement('div');
+        sec.className = 'phase-section';
+        sec.id = `phase-${pi}`;
+        sec.innerHTML = `
+          <div class="phase-section-header">
+            <span class="phase-num">${String(pi+1).padStart(2,'0')}</span>
+            <h2>${phase.phase}</h2>
+          </div>
+          <div class="notes-grid" id="notes-${pi}"></div>`;
+        const grid = sec.querySelector(`#notes-${pi}`);
+        phase.notes.forEach((note, ni) => {
+          const card = document.createElement('a');
+          card.className = 'note-card';
+          card.href = `viewer.html?note=${note.id}`;
+          card.innerHTML = `
+            <span class="note-card-num">${String(ni+1).padStart(2,'0')}</span>
+            <div class="note-card-title">${note.title}</div>
+            <span class="note-card-arrow">Read note →</span>`;
+          grid.appendChild(card);
+        });
+        content.appendChild(sec);
+      });
+    }
+  </script>
+</body>
+</html>
