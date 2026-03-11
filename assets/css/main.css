@@ -1263,3 +1263,76 @@ img { max-width: 100%; }
 .settings-wrapper {
   position: relative;
 }
+
+/* ══════════════════════════════════════════
+   DIAGRAM ZOOM / PAN
+══════════════════════════════════════════ */
+.diagram-zoom-wrap {
+  position: relative;
+  margin: 28px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--code-bg);
+  overflow: hidden;
+}
+
+.diagram-controls {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.diagram-zoom-wrap:hover .diagram-controls { opacity: 1; }
+
+.dz-btn {
+  width: 26px; height: 26px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s ease;
+  padding: 0;
+  line-height: 1;
+}
+.dz-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.dz-hint {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  padding: 0 4px;
+  white-space: nowrap;
+}
+
+.diagram-zoom-inner {
+  overflow: hidden;
+  min-height: 80px;
+  padding: 24px 16px 16px;
+  cursor: grab;
+  user-select: none;
+}
+.diagram-zoom-inner:active { cursor: grabbing; }
+
+.diagram-zoom-inner .mermaid {
+  display: flex;
+  justify-content: center;
+  transition: transform 0.1s ease;
+  will-change: transform;
+}
+
+.diagram-zoom-inner .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}

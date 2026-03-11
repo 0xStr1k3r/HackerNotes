@@ -139,7 +139,13 @@
           div.textContent = el.textContent;
           wrap.replaceWith(div);
         });
-        mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+        mermaid.run({ nodes: document.querySelectorAll('.mermaid') })
+          .then(() => {
+            if (window.HN && window.HN.initDiagramZoom) window.HN.initDiagramZoom();
+          })
+          .catch(() => {
+            if (window.HN && window.HN.initDiagramZoom) window.HN.initDiagramZoom();
+          });
       } catch(e) { console.warn('Mermaid error:', e); }
     }
 
