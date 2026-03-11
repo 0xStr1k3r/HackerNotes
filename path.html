@@ -4,19 +4,27 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Path — HackerNotes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="assets/css/main.css"/>
 </head>
 <body>
   <!-- HEADER -->
   <header class="header">
-    <a class="header-logo" href="index.html"><span class="skull">💀</span><span>HackerNotes</span></a>
+    <a class="header-logo" href="index.html">
+      <span class="logo-symbol">&gt;_</span>
+      <span>HackerNotes</span>
+    </a>
     <div class="header-divider"></div>
     <nav class="header-nav">
       <a href="index.html">Home</a>
       <a href="search.html">Search</a>
     </nav>
     <div class="header-right">
-      <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
+      <div class="settings-wrapper">
+        <button class="settings-btn" id="settings-btn" title="Settings &amp; Theme">⚙</button>
+      </div>
+      <a href="https://github.com/0xStr1k3r/HackerNotes" target="_blank" class="header-btn">GitHub ↗</a>
     </div>
   </header>
 
@@ -40,9 +48,9 @@
             <h1 id="hero-title">Loading…</h1>
           </div>
         </div>
-        <p id="hero-desc" style="color:var(--text-secondary);font-size:15px"></p>
+        <p id="hero-desc" style="color:var(--text-secondary);font-size:15px;margin-top:8px"></p>
         <div class="path-progress-bar"><div class="path-progress-fill" id="progress-fill" style="width:0%"></div></div>
-        <p style="font-size:12px;color:var(--text-muted);margin-top:6px" id="progress-label"></p>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:8px" id="progress-label"></p>
       </div>
 
       <!-- Phase sections -->

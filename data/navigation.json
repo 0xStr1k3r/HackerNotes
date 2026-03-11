@@ -142,52 +142,153 @@ const NAV = {
       {
         phase: "01 — Fundamentals",
         notes: [
-          { id: "pentesting/01-fundamentals/what-is-pentesting",          title: "What is Pentesting?" },
-          { id: "pentesting/01-fundamentals/types-of-pentesting",         title: "Types of Pentesting" },
+          { id: "pentesting/01-fundamentals/what-is-pentesting",            title: "What is Pentesting?" },
+          { id: "pentesting/01-fundamentals/types-of-pentesting",           title: "Types of Pentesting" },
           { id: "pentesting/01-fundamentals/ethical-hacking-vs-pentesting", title: "Ethical Hacking vs Pentesting" },
-          { id: "pentesting/01-fundamentals/legal-considerations",        title: "Legal Considerations" },
-          { id: "pentesting/01-fundamentals/rules-of-engagement",         title: "Rules of Engagement" },
-          { id: "pentesting/01-fundamentals/pentesting-engagement-model", title: "Pentesting Engagement Model" }
+          { id: "pentesting/01-fundamentals/legal-considerations",          title: "Legal Considerations" },
+          { id: "pentesting/01-fundamentals/rules-of-engagement",           title: "Rules of Engagement" },
+          { id: "pentesting/01-fundamentals/pentesting-engagement-model",   title: "Engagement Model" }
         ]
       },
       {
         phase: "02 — Methodologies",
         notes: [
-          { id: "pentesting/02-methodologies/ptes-framework",          title: "PTES Framework" },
-          { id: "pentesting/02-methodologies/nist-testing-framework",  title: "NIST Testing Framework" },
-          { id: "pentesting/02-methodologies/owasp-testing-methodology", title: "OWASP Testing Methodology" },
-          { id: "pentesting/02-methodologies/red-team-vs-pentest",     title: "Red Team vs Pentest" },
-          { id: "pentesting/02-methodologies/purple-team-model",       title: "Purple Team Model" }
+          { id: "pentesting/02-methodologies/ptes-framework",             title: "PTES Framework" },
+          { id: "pentesting/02-methodologies/nist-testing-framework",     title: "NIST SP 800-115" },
+          { id: "pentesting/02-methodologies/owasp-testing-methodology",  title: "OWASP Testing Guide" },
+          { id: "pentesting/02-methodologies/red-team-vs-pentest",        title: "Red Team vs Pentest" },
+          { id: "pentesting/02-methodologies/purple-team-model",          title: "Purple Team Model" }
         ]
       },
       {
-        phase: "02 — Reconnaissance",
+        phase: "03 — Engagement Planning",
         notes: [
-          { id: "pentesting/02-recon/reconnaissance", title: "Reconnaissance" }
+          { id: "pentesting/03-engagement-planning/scope-definition",      title: "Scope Definition" },
+          { id: "pentesting/03-engagement-planning/target-identification",  title: "Target Identification" },
+          { id: "pentesting/03-engagement-planning/legal-authorizations",   title: "Legal Authorizations" },
+          { id: "pentesting/03-engagement-planning/risk-management",        title: "Risk Management" },
+          { id: "pentesting/03-engagement-planning/rules-of-engagement",   title: "Rules of Engagement" }
         ]
       },
       {
-        phase: "03 — Scanning",
+        phase: "04 — Reconnaissance",
         notes: [
-          { id: "pentesting/03-scanning/scanning", title: "Scanning & Enumeration" }
+          { id: "pentesting/04-reconnaissance/recon-overview",             title: "Recon Overview" },
+          { id: "pentesting/04-reconnaissance/passive-recon",              title: "Passive Reconnaissance" },
+          { id: "pentesting/04-reconnaissance/active-recon",               title: "Active Reconnaissance" },
+          { id: "pentesting/04-reconnaissance/osint",                      title: "OSINT Techniques" },
+          { id: "pentesting/04-reconnaissance/subdomain-enumeration",      title: "Subdomain Enumeration" },
+          { id: "pentesting/04-reconnaissance/dns-enumeration",            title: "DNS Enumeration" },
+          { id: "pentesting/04-reconnaissance/asset-discovery",            title: "Asset Discovery" },
+          { id: "pentesting/04-reconnaissance/technology-fingerprinting",  title: "Technology Fingerprinting" }
         ]
       },
       {
-        phase: "04 — Enumeration",
+        phase: "05 — Attack Surface Mapping",
         notes: [
-          { id: "pentesting/04-enumeration/enumeration", title: "Service Enumeration" }
+          { id: "pentesting/05-attack-surface/attack-surface-analysis",   title: "Attack Surface Analysis" },
+          { id: "pentesting/05-attack-surface/service-discovery",         title: "Service Discovery" },
+          { id: "pentesting/05-attack-surface/port-scanning",             title: "Port Scanning" },
+          { id: "pentesting/05-attack-surface/endpoint-discovery",        title: "Endpoint Discovery" },
+          { id: "pentesting/05-attack-surface/parameter-discovery",       title: "Parameter Discovery" },
+          { id: "pentesting/05-attack-surface/hidden-functionality",      title: "Hidden Functionality" }
         ]
       },
       {
-        phase: "05 — Exploitation",
+        phase: "06 — Vulnerability Discovery",
         notes: [
-          { id: "pentesting/05-exploitation/exploitation", title: "Exploitation" }
+          { id: "pentesting/06-vulnerability-discovery/vulnerability-analysis",        title: "Vulnerability Analysis" },
+          { id: "pentesting/06-vulnerability-discovery/manual-testing",               title: "Manual Testing" },
+          { id: "pentesting/06-vulnerability-discovery/automated-scanning",           title: "Automated Scanning" },
+          { id: "pentesting/06-vulnerability-discovery/misconfiguration-detection",   title: "Misconfiguration Detection" },
+          { id: "pentesting/06-vulnerability-discovery/logic-vulnerability-discovery",title: "Logic Vulnerability Discovery" }
         ]
       },
       {
-        phase: "06 — Post-Exploitation",
+        phase: "07 — Exploitation",
         notes: [
-          { id: "pentesting/06-post-exploitation/post-exploitation", title: "Post-Exploitation" }
+          { id: "pentesting/07-exploitation/exploit-development",               title: "Exploit Development" },
+          { id: "pentesting/07-exploitation/payload-generation",                title: "Payload Generation" },
+          { id: "pentesting/07-exploitation/exploit-chaining",                  title: "Exploit Chaining" },
+          { id: "pentesting/07-exploitation/remote-code-execution",             title: "Remote Code Execution" },
+          { id: "pentesting/07-exploitation/privilege-escalation-exploitation", title: "Privilege Escalation" }
+        ]
+      },
+      {
+        phase: "08 — Post Exploitation",
+        notes: [
+          { id: "pentesting/08-post-exploitation/post-exploitation-overview",  title: "Post-Exploitation Overview" },
+          { id: "pentesting/08-post-exploitation/system-enumeration",          title: "System Enumeration" },
+          { id: "pentesting/08-post-exploitation/credential-dumping",          title: "Credential Dumping" },
+          { id: "pentesting/08-post-exploitation/sensitive-data-discovery",    title: "Sensitive Data Discovery" },
+          { id: "pentesting/08-post-exploitation/pivoting",                    title: "Pivoting" }
+        ]
+      },
+      {
+        phase: "09 — Lateral Movement",
+        notes: [
+          { id: "pentesting/09-lateral-movement/lateral-movement-techniques", title: "Lateral Movement Techniques" },
+          { id: "pentesting/09-lateral-movement/network-pivoting",            title: "Network Pivoting" },
+          { id: "pentesting/09-lateral-movement/credential-reuse",            title: "Credential Reuse" },
+          { id: "pentesting/09-lateral-movement/pass-the-hash",               title: "Pass-the-Hash" },
+          { id: "pentesting/09-lateral-movement/remote-execution",            title: "Remote Execution" }
+        ]
+      },
+      {
+        phase: "10 — Privilege Escalation",
+        notes: [
+          { id: "pentesting/10-privilege-escalation/privilege-escalation-overview", title: "Privilege Escalation Overview" },
+          { id: "pentesting/10-privilege-escalation/linux-privilege-escalation",    title: "Linux Privilege Escalation" },
+          { id: "pentesting/10-privilege-escalation/windows-privilege-escalation",  title: "Windows Privilege Escalation" },
+          { id: "pentesting/10-privilege-escalation/misconfiguration-escalation",   title: "Misconfiguration Escalation" },
+          { id: "pentesting/10-privilege-escalation/kernel-exploits",               title: "Kernel Exploits" }
+        ]
+      },
+      {
+        phase: "11 — Persistence",
+        notes: [
+          { id: "pentesting/11-persistence/persistence-techniques",  title: "Persistence Techniques" },
+          { id: "pentesting/11-persistence/scheduled-tasks",         title: "Scheduled Tasks & Cron" },
+          { id: "pentesting/11-persistence/startup-services",        title: "Startup Services" },
+          { id: "pentesting/11-persistence/backdoors",               title: "Backdoors" },
+          { id: "pentesting/11-persistence/account-creation",        title: "Malicious Account Creation" }
+        ]
+      },
+      {
+        phase: "12 — Data Exfiltration",
+        notes: [
+          { id: "pentesting/12-data-exfiltration/data-exfiltration-methods",     title: "Exfiltration Methods" },
+          { id: "pentesting/12-data-exfiltration/sensitive-data-identification",  title: "Sensitive Data Identification" },
+          { id: "pentesting/12-data-exfiltration/covert-channels",               title: "Covert Channels" },
+          { id: "pentesting/12-data-exfiltration/dns-exfiltration",              title: "DNS Exfiltration" }
+        ]
+      },
+      {
+        phase: "13 — Defense Evasion",
+        notes: [
+          { id: "pentesting/13-evasion/antivirus-evasion",    title: "Antivirus Evasion" },
+          { id: "pentesting/13-evasion/edr-evasion",          title: "EDR Evasion" },
+          { id: "pentesting/13-evasion/traffic-obfuscation",  title: "Traffic Obfuscation" },
+          { id: "pentesting/13-evasion/log-evasion",          title: "Log Evasion" }
+        ]
+      },
+      {
+        phase: "14 — Reporting",
+        notes: [
+          { id: "pentesting/14-reporting/pentest-report-structure",  title: "Report Structure" },
+          { id: "pentesting/14-reporting/vulnerability-description", title: "Vulnerability Descriptions" },
+          { id: "pentesting/14-reporting/risk-rating",               title: "Risk Rating" },
+          { id: "pentesting/14-reporting/cvss-scoring",              title: "CVSS Scoring" },
+          { id: "pentesting/14-reporting/executive-summary",         title: "Executive Summary" }
+        ]
+      },
+      {
+        phase: "15 — Remediation",
+        notes: [
+          { id: "pentesting/15-remediation/secure-configurations", title: "Secure Configurations" },
+          { id: "pentesting/15-remediation/patch-management",      title: "Patch Management" },
+          { id: "pentesting/15-remediation/defense-in-depth",      title: "Defense in Depth" },
+          { id: "pentesting/15-remediation/secure-development",    title: "Secure Development" }
         ]
       }
     ]

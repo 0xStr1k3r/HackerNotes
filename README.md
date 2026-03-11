@@ -1,128 +1,110 @@
-<div align="center">
+# HackerNotes
 
-# 💀 HackerNotes
+A free, open-source cybersecurity knowledge base covering penetration testing, web security, red teaming, cloud security, API security, and Active Directory attacks.
 
-**The open-source cybersecurity knowledge base — from foundations to advanced exploitation.**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](contributors/contributing.md)
-
-[**Browse Paths →**](https://your-username.github.io/HackerNotes)
-
-</div>
+**Online version → [hackernotes.dev](https://hackernotes.dev)**
 
 ---
 
-## 📖 What is HackerNotes?
+## Use Online
 
-HackerNotes is a **deep, structured cybersecurity knowledge base** built for learners who want to reach professional-level understanding. Unlike CTF platforms, there are no challenges — only thorough, methodical notes covering real techniques used by security professionals.
-
-**Philosophy:** Every note goes from beginner explanation → technical deep dive → full exploitation methodology.
+Visit **[hackernotes.dev](https://hackernotes.dev)** — no sign-up, no install, works in any browser.
 
 ---
 
-## 🗺️ Learning Paths
+## Use Offline
 
-| Path | Topics | Coverage |
-|------|--------|----------|
-| 🌐 **Web Pentesting** | 40+ notes across 12 phases | HTTP, Auth, XSS, SQLi, SSRF, SSTI, APIs... |
-| 🎯 **Penetration Testing** | Network pentesting fundamentals | Recon, Scanning, Exploitation, Post-Exploitation |
-| 🔴 **Red Teaming** | Adversary simulation | C2, Initial Access, Lateral Movement, EDR Evasion |
-| ☁️ **Cloud Security** | AWS, containers, IAM | Misconfigs, IAM exploitation, Container escapes |
-| 🔌 **API Pentesting** | REST, GraphQL, OWASP API Top 10 | BOLA, Mass Assignment, Auth bypass |
-| 🏛️ **Active Directory** | Complete AD attack path | Kerberoasting, DCSync, Golden Ticket, AD CS |
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/0xStr1k3r/HackerNotes.git
+   cd HackerNotes
+   ```
 
----
+2. **Serve locally** (pick any method)
 
-## 🚀 Quick Start
+   ```bash
+   # Python
+   python3 -m http.server 8080
 
-```bash
-# Clone the repository
-git clone https://github.com/your-username/HackerNotes.git
+   # Node.js
+   npx serve .
 
-# Open locally
-cd HackerNotes
-# Open index.html in your browser
-# OR serve with Python:
-python3 -m http.server 8080
-# Visit: http://localhost:8080
-```
+   # VS Code
+   # Install "Live Server" extension → right-click index.html → Open with Live Server
+   ```
 
-Or visit the **[live GitHub Pages site](https://your-username.github.io/HackerNotes)**.
+3. **Open your browser**
+   ```
+   http://localhost:8080
+   ```
 
----
-
-## 🏗️ Tech Stack
-
-| Component | Technology |
-|-----------|-----------|
-| UI | HTML5 + Custom CSS (dark theme) |
-| Markdown rendering | Marked.js |
-| Sanitization | DOMPurify |
-| Syntax highlighting | Prism.js |
-| Diagrams | Mermaid.js |
-| Search | Lunr.js (client-side full-text) |
-| Hosting | GitHub Pages (100% static) |
+> **Note:** Do not open `index.html` directly as a file (`file://`). You need a local server because notes are loaded dynamically.
 
 ---
 
-## 📁 Structure
+## Contribute
 
-```
-HackerNotes/
-├── index.html              # Home page
-├── paths.html              # All learning paths
-├── viewer.html             # Note reader
-├── search.html             # Full-text search
-├── assets/
-│   ├── css/                # Styling
-│   └── js/                 # App logic
-├── notes/
-│   ├── web-pentesting/     # 12 phases, 40+ notes
-│   │   ├── 01-foundations/
-│   │   ├── 02-web-architecture/
-│   │   ├── 03-http-protocol/
-│   │   ├── 04-client-side/
-│   │   ├── 05-authentication/
-│   │   ├── 06-core-vulnerabilities/
-│   │   ├── 07-advanced-vulnerabilities/
-│   │   ├── 08-api-security/
-│   │   ├── 09-modern-web/
-│   │   ├── 10-methodology/
-│   │   ├── 11-post-exploitation/
-│   │   └── 12-reporting/
-│   ├── pentesting/
-│   ├── red-teaming/
-│   ├── cloud-security/
-│   ├── api-pentesting/
-│   └── ad-pentesting/
-├── data/
-│   └── navigation.json     # All nav data + JS constants
-└── contributors/
-    ├── contributing.md
-    └── note-template.md
-```
+Contributions are welcome — whether it's fixing a typo, improving an existing note, or adding a new topic.
+
+### How to contribute
+
+1. **Fork the repository**
+   ```
+   https://github.com/0xStr1k3r/HackerNotes
+   ```
+
+2. **Clone your fork**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/HackerNotes.git
+   cd HackerNotes
+   ```
+
+3. **Create a branch**
+   ```bash
+   git checkout -b add/your-topic-name
+   ```
+
+4. **Add or edit notes**
+
+   Notes live in the `notes/` folder, organized by path and phase:
+   ```
+   notes/
+   ├── web-pentesting/
+   ├── pentesting/
+   ├── red-teaming/
+   ├── cloud-security/
+   ├── api-pentesting/
+   └── ad-pentesting/
+   ```
+
+   Each note is a plain Markdown (`.md`) file. Follow the existing style — use headings, code blocks, and Mermaid diagrams where helpful.
+
+5. **Register your note in navigation**
+
+   Open `data/navigation.json` and add your note's entry under the correct phase:
+   ```js
+   { id: "pentesting/04-reconnaissance/your-topic", title: "Your Topic Title" }
+   ```
+   The `id` must match the file path under `notes/` (without `.md`).
+
+6. **Commit and push**
+   ```bash
+   git add .
+   git commit -m "add: your topic name"
+   git push origin add/your-topic-name
+   ```
+
+7. **Open a Pull Request** on GitHub against the `main` branch.
+
+### Note writing guidelines
+
+- Write for beginners but go deep — assume zero knowledge, build up to advanced
+- Use real commands and examples
+- Add a Mermaid diagram if it helps explain a concept
+- Keep file names lowercase with hyphens: `sql-injection.md`
 
 ---
 
-## 🤝 Contributing
+## License
 
-We welcome contributions! Read [CONTRIBUTING.md](contributors/contributing.md) for guidelines.
-
-**Quick steps:**
-1. Fork the repo
-2. Write a note using the [template](contributors/note-template.md)
-3. Place it in the correct path folder
-4. Open a Pull Request
-
----
-
-## 📜 License
-
-MIT License — free to use, share, and contribute.
-
----
-
-<div align="center">
-Built by the community, for the community. 🔐
-</div>
+MIT — free to use, share, and modify.

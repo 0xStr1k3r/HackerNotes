@@ -4,21 +4,24 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Note — HackerNotes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="assets/css/main.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"/>
 </head>
 <body>
   <!-- HEADER -->
   <header class="header">
-    <a class="header-logo" href="index.html"><span class="skull">💀</span><span>HackerNotes</span></a>
+    <a class="header-logo" href="index.html">
+      <span class="logo-symbol">&gt;_</span>
+      <span>HackerNotes</span>
+    </a>
     <div class="header-divider"></div>
     <nav class="header-nav" id="breadcrumb-nav"></nav>
     <div class="header-right">
-      <div class="sidebar-mode-bar" title="Sidebar mode">
-        <button id="mode-normal" class="mode-btn active" title="Sidebar always visible">⊡ Normal</button>
-        <button id="mode-autohide" class="mode-btn" title="Sidebar hides while reading">⊟ Auto-hide</button>
+      <div class="settings-wrapper">
+        <button class="settings-btn" id="settings-btn" title="Settings &amp; Theme">⚙</button>
       </div>
-      <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
       <a href="search.html" class="header-btn">Search</a>
     </div>
   </header>
@@ -26,6 +29,9 @@
   <div class="viewer-layout" id="viewer-layout">
     <!-- SIDEBAR PEEK BUTTON (shown when sidebar hidden) -->
     <button class="sidebar-peek-btn" id="sidebar-peek" title="Show sidebar">❯</button>
+
+    <!-- Mobile overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
     <!-- SIDEBAR -->
     <aside class="viewer-sidebar" id="viewer-sidebar">
