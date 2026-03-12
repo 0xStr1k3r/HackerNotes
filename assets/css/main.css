@@ -1276,6 +1276,37 @@ img { max-width: 100%; }
   overflow: hidden;
 }
 
+.diagram-zoom-wrap:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background:
+    radial-gradient(circle at top, rgba(79,172,222,0.12), transparent 40%),
+    var(--bg);
+}
+
+.diagram-fullscreen-fallback {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background:
+    radial-gradient(circle at top, rgba(79,172,222,0.12), transparent 40%),
+    var(--bg);
+  z-index: 999999;
+}
+
+body.diagram-fullscreen-active {
+  overflow: hidden;
+}
+
 .diagram-controls {
   position: absolute;
   top: 8px;
@@ -1288,6 +1319,12 @@ img { max-width: 100%; }
   transition: opacity 0.2s ease;
 }
 .diagram-zoom-wrap:hover .diagram-controls { opacity: 1; }
+.diagram-zoom-wrap:fullscreen .diagram-controls,
+.diagram-fullscreen-fallback .diagram-controls {
+  opacity: 1;
+  top: 16px;
+  right: 16px;
+}
 
 .dz-btn {
   width: 26px; height: 26px;
@@ -1303,6 +1340,11 @@ img { max-width: 100%; }
   line-height: 1;
 }
 .dz-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.dz-btn.is-active {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
@@ -1325,6 +1367,16 @@ img { max-width: 100%; }
 }
 .diagram-zoom-inner:active { cursor: grabbing; }
 
+.diagram-zoom-wrap:fullscreen .diagram-zoom-inner,
+.diagram-fullscreen-fallback .diagram-zoom-inner {
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 32px 32px;
+}
+
 .diagram-zoom-inner .mermaid {
   display: flex;
   justify-content: center;
@@ -1332,7 +1384,34 @@ img { max-width: 100%; }
   will-change: transform;
 }
 
+.diagram-zoom-wrap:fullscreen .diagram-zoom-inner .mermaid,
+.diagram-fullscreen-fallback .diagram-zoom-inner .mermaid {
+  max-width: none;
+}
+
 .diagram-zoom-inner .mermaid svg {
   max-width: 100%;
   height: auto;
+}
+
+.diagram-zoom-wrap:fullscreen .diagram-zoom-inner .mermaid svg,
+.diagram-fullscreen-fallback .diagram-zoom-inner .mermaid svg {
+  max-width: min(1600px, 95vw);
+  max-height: calc(100vh - 120px);
+  width: auto;
+}
+
+@media (max-width: 720px) {
+  .diagram-controls {
+    opacity: 1;
+  }
+
+  .dz-hint {
+    display: none;
+  }
+
+  .diagram-zoom-wrap:fullscreen .diagram-zoom-inner,
+  .diagram-fullscreen-fallback .diagram-zoom-inner {
+    padding: 64px 16px 16px;
+  }
 }

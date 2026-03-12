@@ -501,24 +501,198 @@ const NAV = {
     color: "#39d353",
     phases: [
       {
-        phase: "01 — Foundations",
-        notes: [{ id: "api-pentesting/01-foundations/api-fundamentals", title: "API Fundamentals" }]
+        phase: "01 — API Fundamentals",
+        notes: [
+          { id: "api-pentesting/01-api-fundamentals/what-is-an-api", title: "What Is An API" },
+          { id: "api-pentesting/01-api-fundamentals/api-types", title: "API Types" },
+          { id: "api-pentesting/01-api-fundamentals/rest-api", title: "REST API" },
+          { id: "api-pentesting/01-api-fundamentals/soap-api", title: "SOAP API" },
+          { id: "api-pentesting/01-api-fundamentals/graphql-api", title: "GraphQL API" },
+          { id: "api-pentesting/01-api-fundamentals/rpc-api", title: "RPC API" },
+          { id: "api-pentesting/01-api-fundamentals/webhooks", title: "Webhooks" },
+          { id: "api-pentesting/01-api-fundamentals/api-security-basics", title: "API Security Basics" }
+        ]
       },
       {
-        phase: "02 — REST API",
-        notes: [{ id: "api-pentesting/02-rest/rest-pentesting", title: "REST API Pentesting" }]
+        phase: "02 — API Architecture",
+        notes: [
+          { id: "api-pentesting/02-api-architecture/api-architecture-overview", title: "API Architecture Overview" },
+          { id: "api-pentesting/02-api-architecture/api-gateway", title: "API Gateway" },
+          { id: "api-pentesting/02-api-architecture/microservices-architecture", title: "Microservices Architecture" },
+          { id: "api-pentesting/02-api-architecture/service-discovery", title: "Service Discovery" },
+          { id: "api-pentesting/02-api-architecture/api-versioning", title: "API Versioning" },
+          { id: "api-pentesting/02-api-architecture/backend-for-frontend", title: "Backend For Frontend" },
+          { id: "api-pentesting/02-api-architecture/service-mesh-basics", title: "Service Mesh Basics" },
+          { id: "api-pentesting/02-api-architecture/event-driven-api-architecture", title: "Event Driven API Architecture" }
+        ]
       },
       {
-        phase: "03 — GraphQL",
-        notes: [{ id: "api-pentesting/03-graphql/graphql-pentesting", title: "GraphQL Pentesting" }]
+        phase: "03 — API Communication Protocols",
+        notes: [
+          { id: "api-pentesting/03-api-protocols/http-in-api", title: "HTTP In API" },
+          { id: "api-pentesting/03-api-protocols/rest-communication", title: "REST Communication" },
+          { id: "api-pentesting/03-api-protocols/json-format", title: "JSON Format" },
+          { id: "api-pentesting/03-api-protocols/xml-format", title: "XML Format" },
+          { id: "api-pentesting/03-api-protocols/grpc-protocol", title: "gRPC Protocol" },
+          { id: "api-pentesting/03-api-protocols/protobuf-basics", title: "Protobuf Basics" },
+          { id: "api-pentesting/03-api-protocols/websocket-apis", title: "WebSocket APIs" },
+          { id: "api-pentesting/03-api-protocols/webhook-delivery-models", title: "Webhook Delivery Models" },
+          { id: "api-pentesting/03-api-protocols/http2-for-security-testers", title: "HTTP/2 For Security Testers" }
+        ]
       },
       {
-        phase: "04 — Vulnerabilities",
-        notes: [{ id: "api-pentesting/04-vulnerabilities/owasp-api-top10", title: "OWASP API Top 10" }]
+        phase: "04 — API Authentication & Authorization",
+        notes: [
+          { id: "api-pentesting/04-authentication/api-authentication-models", title: "API Authentication Models" },
+          { id: "api-pentesting/04-authentication/basic-authentication", title: "Basic Authentication" },
+          { id: "api-pentesting/04-authentication/token-authentication", title: "Token Authentication" },
+          { id: "api-pentesting/04-authentication/api-keys", title: "API Keys" },
+          { id: "api-pentesting/04-authentication/jwt-security", title: "JWT Security" },
+          { id: "api-pentesting/04-authentication/oauth-security", title: "OAuth Security" },
+          { id: "api-pentesting/04-authentication/oidc-security", title: "OIDC Security" },
+          { id: "api-pentesting/04-authentication/authorization-flows", title: "Authorization Flows" },
+          { id: "api-pentesting/04-authentication/role-based-access-control", title: "Role Based Access Control" },
+          { id: "api-pentesting/04-authentication/attribute-based-access-control", title: "Attribute Based Access Control" },
+          { id: "api-pentesting/04-authentication/service-to-service-authentication", title: "Service To Service Authentication" },
+          { id: "api-pentesting/04-authentication/sender-constrained-tokens", title: "Sender Constrained Tokens" },
+          { id: "api-pentesting/04-authentication/refresh-token-rotation", title: "Refresh Token Rotation" }
+        ]
       },
       {
-        phase: "05 — Methodology",
-        notes: [{ id: "api-pentesting/05-methodology/api-methodology", title: "API Pentest Methodology" }]
+        phase: "05 — API Enumeration & Reconnaissance",
+        notes: [
+          { id: "api-pentesting/05-recon/api-reconnaissance", title: "API Reconnaissance" },
+          { id: "api-pentesting/05-recon/endpoint-discovery", title: "Endpoint Discovery" },
+          { id: "api-pentesting/05-recon/api-documentation-analysis", title: "API Documentation Analysis" },
+          { id: "api-pentesting/05-recon/openapi-swagger-enumeration", title: "OpenAPI Swagger Enumeration" },
+          { id: "api-pentesting/05-recon/parameter-discovery", title: "Parameter Discovery" },
+          { id: "api-pentesting/05-recon/hidden-endpoints", title: "Hidden Endpoints" },
+          { id: "api-pentesting/05-recon/graphql-endpoint-discovery", title: "GraphQL Endpoint Discovery" },
+          { id: "api-pentesting/05-recon/grpc-service-discovery", title: "gRPC Service Discovery" },
+          { id: "api-pentesting/05-recon/websocket-endpoint-discovery", title: "WebSocket Endpoint Discovery" },
+          { id: "api-pentesting/05-recon/version-hunting", title: "Version Hunting" }
+        ]
+      },
+      {
+        phase: "06 — API Attack Surface Mapping",
+        notes: [
+          { id: "api-pentesting/06-attack-surface/endpoint-mapping", title: "Endpoint Mapping" },
+          { id: "api-pentesting/06-attack-surface/parameter-mapping", title: "Parameter Mapping" },
+          { id: "api-pentesting/06-attack-surface/request-analysis", title: "Request Analysis" },
+          { id: "api-pentesting/06-attack-surface/response-analysis", title: "Response Analysis" },
+          { id: "api-pentesting/06-attack-surface/data-flow-analysis", title: "Data Flow Analysis" },
+          { id: "api-pentesting/06-attack-surface/business-logic-analysis", title: "Business Logic Analysis" },
+          { id: "api-pentesting/06-attack-surface/trust-boundary-mapping", title: "Trust Boundary Mapping" },
+          { id: "api-pentesting/06-attack-surface/authorization-matrix", title: "Authorization Matrix" }
+        ]
+      },
+      {
+        phase: "07 — Core API Vulnerabilities",
+        notes: [
+          { id: "api-pentesting/07-core-vulnerabilities/broken-object-level-authorization", title: "Broken Object Level Authorization" },
+          { id: "api-pentesting/07-core-vulnerabilities/broken-authentication", title: "Broken Authentication" },
+          { id: "api-pentesting/07-core-vulnerabilities/broken-object-property-level-authorization", title: "Broken Object Property Level Authorization" },
+          { id: "api-pentesting/07-core-vulnerabilities/unrestricted-resource-consumption", title: "Unrestricted Resource Consumption" },
+          { id: "api-pentesting/07-core-vulnerabilities/broken-function-level-authorization", title: "Broken Function Level Authorization" },
+          { id: "api-pentesting/07-core-vulnerabilities/unrestricted-access-to-sensitive-business-flows", title: "Unrestricted Access To Sensitive Business Flows" },
+          { id: "api-pentesting/07-core-vulnerabilities/server-side-request-forgery", title: "Server Side Request Forgery" },
+          { id: "api-pentesting/07-core-vulnerabilities/security-misconfiguration", title: "Security Misconfiguration" },
+          { id: "api-pentesting/07-core-vulnerabilities/improper-inventory-management", title: "Improper Inventory Management" },
+          { id: "api-pentesting/07-core-vulnerabilities/unsafe-consumption-of-apis", title: "Unsafe Consumption Of APIs" },
+          { id: "api-pentesting/07-core-vulnerabilities/injection-attacks", title: "Injection Attacks" }
+        ]
+      },
+      {
+        phase: "08 — Advanced API Vulnerabilities",
+        notes: [
+          { id: "api-pentesting/08-advanced-vulnerabilities/race-conditions-in-apis", title: "Race Conditions In APIs" },
+          { id: "api-pentesting/08-advanced-vulnerabilities/business-logic-vulnerabilities", title: "Business Logic Vulnerabilities" },
+          { id: "api-pentesting/08-advanced-vulnerabilities/rate-limit-bypass", title: "Rate Limit Bypass" },
+          { id: "api-pentesting/08-advanced-vulnerabilities/api-deserialization", title: "API Deserialization" },
+          { id: "api-pentesting/08-advanced-vulnerabilities/server-side-request-forgery", title: "Server Side Request Forgery" },
+          { id: "api-pentesting/08-advanced-vulnerabilities/api-request-smuggling", title: "API Request Smuggling" },
+          { id: "api-pentesting/08-advanced-vulnerabilities/cache-poisoning-and-cache-confusion", title: "Cache Poisoning And Cache Confusion" },
+          { id: "api-pentesting/08-advanced-vulnerabilities/cross-tenant-data-leakage", title: "Cross Tenant Data Leakage" },
+          { id: "api-pentesting/08-advanced-vulnerabilities/event-ordering-abuse", title: "Event Ordering Abuse" },
+          { id: "api-pentesting/08-advanced-vulnerabilities/graphql-injection", title: "GraphQL Injection" }
+        ]
+      },
+      {
+        phase: "09 — GraphQL Security",
+        notes: [
+          { id: "api-pentesting/09-graphql-security/graphql-basics", title: "GraphQL Basics" },
+          { id: "api-pentesting/09-graphql-security/graphql-architecture", title: "GraphQL Architecture" },
+          { id: "api-pentesting/09-graphql-security/graphql-introspection", title: "GraphQL Introspection" },
+          { id: "api-pentesting/09-graphql-security/graphql-authorization", title: "GraphQL Authorization" },
+          { id: "api-pentesting/09-graphql-security/graphql-query-abuse", title: "GraphQL Query Abuse" },
+          { id: "api-pentesting/09-graphql-security/graphql-batching-and-alias-abuse", title: "GraphQL Batching And Alias Abuse" },
+          { id: "api-pentesting/09-graphql-security/graphql-injection", title: "GraphQL Injection" },
+          { id: "api-pentesting/09-graphql-security/graphql-denial-of-service", title: "GraphQL Denial Of Service" },
+          { id: "api-pentesting/09-graphql-security/graphql-subscription-security", title: "GraphQL Subscription Security" }
+        ]
+      },
+      {
+        phase: "10 — Microservices & API Gateway Security",
+        notes: [
+          { id: "api-pentesting/10-microservices-security/microservices-security", title: "Microservices Security" },
+          { id: "api-pentesting/10-microservices-security/service-to-service-authentication", title: "Service To Service Authentication" },
+          { id: "api-pentesting/10-microservices-security/api-gateway-security", title: "API Gateway Security" },
+          { id: "api-pentesting/10-microservices-security/service-mesh-security", title: "Service Mesh Security" },
+          { id: "api-pentesting/10-microservices-security/internal-api-attacks", title: "Internal API Attacks" },
+          { id: "api-pentesting/10-microservices-security/east-west-traffic-trust", title: "East West Traffic Trust" },
+          { id: "api-pentesting/10-microservices-security/machine-identity-abuse", title: "Machine Identity Abuse" }
+        ]
+      },
+      {
+        phase: "11 — API Exploitation Methodology",
+        notes: [
+          { id: "api-pentesting/11-exploitation-methodology/api-testing-methodology", title: "API Testing Methodology" },
+          { id: "api-pentesting/11-exploitation-methodology/endpoint-fuzzing", title: "Endpoint Fuzzing" },
+          { id: "api-pentesting/11-exploitation-methodology/parameter-manipulation", title: "Parameter Manipulation" },
+          { id: "api-pentesting/11-exploitation-methodology/authorization-testing", title: "Authorization Testing" },
+          { id: "api-pentesting/11-exploitation-methodology/business-logic-exploitation", title: "Business Logic Exploitation" },
+          { id: "api-pentesting/11-exploitation-methodology/protocol-specific-testing", title: "Protocol Specific Testing" },
+          { id: "api-pentesting/11-exploitation-methodology/stateful-workflow-testing", title: "Stateful Workflow Testing" },
+          { id: "api-pentesting/11-exploitation-methodology/automation-strategies", title: "Automation Strategies" }
+        ]
+      },
+      {
+        phase: "12 — API Post Exploitation",
+        notes: [
+          { id: "api-pentesting/12-post-exploitation/data-extraction", title: "Data Extraction" },
+          { id: "api-pentesting/12-post-exploitation/privilege-escalation", title: "Privilege Escalation" },
+          { id: "api-pentesting/12-post-exploitation/account-takeover", title: "Account Takeover" },
+          { id: "api-pentesting/12-post-exploitation/api-chaining-attacks", title: "API Chaining Attacks" },
+          { id: "api-pentesting/12-post-exploitation/cross-service-pivoting", title: "Cross Service Pivoting" },
+          { id: "api-pentesting/12-post-exploitation/tenant-impact-analysis", title: "Tenant Impact Analysis" }
+        ]
+      },
+      {
+        phase: "13 — API Security Testing Automation",
+        notes: [
+          { id: "api-pentesting/13-automation/api-fuzzing-concepts", title: "API Fuzzing Concepts" },
+          { id: "api-pentesting/13-automation/automated-api-testing", title: "Automated API Testing" },
+          { id: "api-pentesting/13-automation/schema-based-testing", title: "Schema Based Testing" },
+          { id: "api-pentesting/13-automation/continuous-api-security-testing", title: "Continuous API Security Testing" },
+          { id: "api-pentesting/13-automation/graphql-automation", title: "GraphQL Automation" },
+          { id: "api-pentesting/13-automation/grpc-testing-automation", title: "gRPC Testing Automation" },
+          { id: "api-pentesting/13-automation/drift-detection", title: "Drift Detection" }
+        ]
+      },
+      {
+        phase: "14 — API Hardening & Defense",
+        notes: [
+          { id: "api-pentesting/14-defense/secure-api-design", title: "Secure API Design" },
+          { id: "api-pentesting/14-defense/authentication-hardening", title: "Authentication Hardening" },
+          { id: "api-pentesting/14-defense/authorization-hardening", title: "Authorization Hardening" },
+          { id: "api-pentesting/14-defense/rate-limiting", title: "Rate Limiting" },
+          { id: "api-pentesting/14-defense/input-validation", title: "Input Validation" },
+          { id: "api-pentesting/14-defense/api-monitoring", title: "API Monitoring" },
+          { id: "api-pentesting/14-defense/api-inventory-management", title: "API Inventory Management" },
+          { id: "api-pentesting/14-defense/secret-management", title: "Secret Management" },
+          { id: "api-pentesting/14-defense/webhook-hardening", title: "Webhook Hardening" },
+          { id: "api-pentesting/14-defense/machine-identity-hardening", title: "Machine Identity Hardening" }
+        ]
       }
     ]
   },

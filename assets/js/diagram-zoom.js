@@ -38,6 +38,7 @@
         <button class="dz-btn" data-action="in"  title="Zoom in">＋</button>
         <button class="dz-btn" data-action="out" title="Zoom out">－</button>
         <button class="dz-btn" data-action="reset" title="Reset">⊙</button>
+        <button class="dz-btn" data-action="fullscreen" title="View fullscreen" aria-label="View fullscreen">⛶</button>
         <span class="dz-hint">scroll to zoom · drag to pan</span>
       `;
 
@@ -46,6 +47,8 @@
       inner.appendChild(el);
       wrap.appendChild(controls);
       wrap.appendChild(inner);
+
+      const fullscreenBtn = controls.querySelector('[data-action="fullscreen"]');
 
       function applyTransform() {
         el.style.transform = `scale(${scale}) translate(${tx}px, ${ty}px)`;
@@ -69,6 +72,51 @@
         applyTransform();
       }
 
+      function isFullscreenActive() {
+        return document.fullscreenElement === wrap || wrap.classList.contains('diagram-fullscreen-fallback');
+      }
+
+      function updateFullscreenButton() {
+        if (!fullscreenBtn) return;
+        const active = isFullscreenActive();
+        fullscreenBtn.classList.toggle('is-active', active);
+        fullscreenBtn.textContent = active ? '✕' : '⛶';
+        fullscreenBtn.title = active ? 'Exit fullscreen' : 'View fullscreen';
+        fullscreenBtn.setAttribute('aria-label', active ? 'Exit fullscreen' : 'View fullscreen');
+      }
+
+      function setFallbackFullscreen(active) {
+        wrap.classList.toggle('diagram-fullscreen-fallback', active);
+        document.body.classList.toggle('diagram-fullscreen-active', active);
+        updateFullscreenButton();
+      }
+
+      function enterFullscreen() {
+        if (typeof wrap.requestFullscreen === 'function') {
+          wrap.requestFullscreen().catch(() => setFallbackFullscreen(true));
+          return;
+        }
+        setFallbackFullscreen(true);
+      }
+
+      function exitFullscreen() {
+        if (document.fullscreenElement === wrap && typeof document.exitFullscreen === 'function') {
+          document.exitFullscreen();
+          return;
+        }
+        if (wrap.classList.contains('diagram-fullscreen-fallback')) {
+          setFallbackFullscreen(false);
+        }
+      }
+
+      function toggleFullscreen() {
+        if (isFullscreenActive()) {
+          exitFullscreen();
+        } else {
+          enterFullscreen();
+        }
+      }
+
       // Button clicks
       controls.addEventListener('click', function(e) {
         const btn = e.target.closest('.dz-btn');
@@ -77,6 +125,7 @@
         if (action === 'in')    zoomBy(+0.25);
         if (action === 'out')   zoomBy(-0.25);
         if (action === 'reset') resetView();
+        if (action === 'fullscreen') toggleFullscreen();
       });
 
       // Mouse wheel zoom
@@ -131,8 +180,16 @@
         }
       }, { passive: false });
 
+      document.addEventListener('fullscreenchange', updateFullscreenButton);
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && wrap.classList.contains('diagram-fullscreen-fallback')) {
+          setFallbackFullscreen(false);
+        }
+      });
+
       inner.style.cursor = 'grab';
       applyTransform();
+      updateFullscreenButton();
     });
   };
 })();
