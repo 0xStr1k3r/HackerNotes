@@ -299,28 +299,176 @@ const NAV = {
     color: "#f78166",
     phases: [
       {
-        phase: "01 — Methodology",
-        notes: [{ id: "red-teaming/01-methodology/red-team-methodology", title: "Red Team Methodology" }]
+        phase: "01 — Fundamentals",
+        notes: [
+          { id: "red-teaming/01-fundamentals/what-is-red-teaming", title: "What is Red Teaming?" },
+          { id: "red-teaming/01-fundamentals/red-team-vs-pentesting", title: "Red Teaming vs Pentesting" },
+          { id: "red-teaming/01-fundamentals/red-team-vs-purple-team", title: "Red Team vs Purple Team" },
+          { id: "red-teaming/01-fundamentals/adversary-emulation", title: "Adversary Emulation" },
+          { id: "red-teaming/01-fundamentals/threat-modeling", title: "Threat Modeling" },
+          { id: "red-teaming/01-fundamentals/attack-simulation", title: "Attack Simulation" }
+        ]
       },
       {
-        phase: "02 — Initial Access",
-        notes: [{ id: "red-teaming/02-initial-access/initial-access", title: "Initial Access TTPs" }]
+        phase: "02 — Adversary Methodology",
+        notes: [
+          { id: "red-teaming/02-adversary-methodology/mitre-attack-framework", title: "MITRE ATT&CK Framework" },
+          { id: "red-teaming/02-adversary-methodology/cyber-kill-chain", title: "Cyber Kill Chain" },
+          { id: "red-teaming/02-adversary-methodology/attack-lifecycle", title: "Attack Lifecycle" },
+          { id: "red-teaming/02-adversary-methodology/tactics-techniques-procedures", title: "Tactics, Techniques, and Procedures" },
+          { id: "red-teaming/02-adversary-methodology/campaign-operations", title: "Campaign Operations" }
+        ]
       },
       {
-        phase: "03 — C2 Infrastructure",
-        notes: [{ id: "red-teaming/03-c2/c2-infrastructure", title: "C2 Infrastructure" }]
+        phase: "03 — Engagement Planning",
+        notes: [
+          { id: "red-teaming/03-engagement-planning/rules-of-engagement", title: "Rules of Engagement" },
+          { id: "red-teaming/03-engagement-planning/target-scoping", title: "Target Scoping" },
+          { id: "red-teaming/03-engagement-planning/attack-objectives", title: "Attack Objectives" },
+          { id: "red-teaming/03-engagement-planning/campaign-planning", title: "Campaign Planning" },
+          { id: "red-teaming/03-engagement-planning/risk-management", title: "Risk Management" },
+          { id: "red-teaming/03-engagement-planning/deconfliction", title: "Deconfliction" }
+        ]
       },
       {
-        phase: "04 — Lateral Movement",
-        notes: [{ id: "red-teaming/04-lateral-movement/lateral-movement", title: "Lateral Movement" }]
+        phase: "04 — Infrastructure",
+        notes: [
+          { id: "red-teaming/04-infrastructure/attack-infrastructure", title: "Attack Infrastructure" },
+          { id: "red-teaming/04-infrastructure/command-and-control-architecture", title: "Command and Control Architecture" },
+          { id: "red-teaming/04-infrastructure/redirectors", title: "Redirectors" },
+          { id: "red-teaming/04-infrastructure/domain-fronting", title: "Domain Fronting" },
+          { id: "red-teaming/04-infrastructure/traffic-obfuscation", title: "Traffic Obfuscation" },
+          { id: "red-teaming/04-infrastructure/payload-hosting", title: "Payload Hosting" },
+          { id: "red-teaming/04-infrastructure/staging-infrastructure", title: "Staging Infrastructure" }
+        ]
       },
       {
-        phase: "05 — Persistence",
-        notes: [{ id: "red-teaming/05-persistence/persistence", title: "Persistence Techniques" }]
+        phase: "05 — Initial Access",
+        notes: [
+          { id: "red-teaming/05-initial-access/initial-access-overview", title: "Initial Access Overview" },
+          { id: "red-teaming/05-initial-access/phishing", title: "Phishing" },
+          { id: "red-teaming/05-initial-access/web-exploitation", title: "Web Exploitation" },
+          { id: "red-teaming/05-initial-access/credential-attacks", title: "Credential Attacks" },
+          { id: "red-teaming/05-initial-access/supply-chain-access", title: "Supply Chain Access" },
+          { id: "red-teaming/05-initial-access/external-service-exploitation", title: "External Service Exploitation" }
+        ]
       },
       {
-        phase: "06 — Evasion",
-        notes: [{ id: "red-teaming/06-evasion/evasion", title: "AV/EDR Evasion" }]
+        phase: "06 — Persistence",
+        notes: [
+          { id: "red-teaming/06-persistence/persistence-overview", title: "Persistence Overview" },
+          { id: "red-teaming/06-persistence/scheduled-tasks", title: "Scheduled Tasks" },
+          { id: "red-teaming/06-persistence/registry-persistence", title: "Registry Persistence" },
+          { id: "red-teaming/06-persistence/startup-services", title: "Startup Services" },
+          { id: "red-teaming/06-persistence/web-shells", title: "Web Shells" },
+          { id: "red-teaming/06-persistence/implant-installation", title: "Implant Installation" }
+        ]
+      },
+      {
+        phase: "07 — Privilege Escalation",
+        notes: [
+          { id: "red-teaming/07-privilege-escalation/privilege-escalation-overview", title: "Privilege Escalation Overview" },
+          { id: "red-teaming/07-privilege-escalation/windows-escalation", title: "Windows Escalation" },
+          { id: "red-teaming/07-privilege-escalation/linux-escalation", title: "Linux Escalation" },
+          { id: "red-teaming/07-privilege-escalation/misconfiguration-escalation", title: "Misconfiguration Escalation" },
+          { id: "red-teaming/07-privilege-escalation/token-impersonation", title: "Token Impersonation" }
+        ]
+      },
+      {
+        phase: "08 — Defense Evasion",
+        notes: [
+          { id: "red-teaming/08-defense-evasion/antivirus-evasion", title: "Antivirus Evasion" },
+          { id: "red-teaming/08-defense-evasion/edr-evasion", title: "EDR Evasion" },
+          { id: "red-teaming/08-defense-evasion/process-injection", title: "Process Injection" },
+          { id: "red-teaming/08-defense-evasion/obfuscation-techniques", title: "Obfuscation Techniques" },
+          { id: "red-teaming/08-defense-evasion/living-off-the-land", title: "Living off the Land" }
+        ]
+      },
+      {
+        phase: "09 — Credential Access",
+        notes: [
+          { id: "red-teaming/09-credential-access/credential-harvesting", title: "Credential Harvesting" },
+          { id: "red-teaming/09-credential-access/password-dumping", title: "Password Dumping" },
+          { id: "red-teaming/09-credential-access/token-theft", title: "Token Theft" },
+          { id: "red-teaming/09-credential-access/keylogging", title: "Keylogging" },
+          { id: "red-teaming/09-credential-access/credential-reuse", title: "Credential Reuse" }
+        ]
+      },
+      {
+        phase: "10 — Discovery",
+        notes: [
+          { id: "red-teaming/10-discovery/network-discovery", title: "Network Discovery" },
+          { id: "red-teaming/10-discovery/host-enumeration", title: "Host Enumeration" },
+          { id: "red-teaming/10-discovery/account-discovery", title: "Account Discovery" },
+          { id: "red-teaming/10-discovery/domain-discovery", title: "Domain Discovery" },
+          { id: "red-teaming/10-discovery/service-discovery", title: "Service Discovery" }
+        ]
+      },
+      {
+        phase: "11 — Lateral Movement",
+        notes: [
+          { id: "red-teaming/11-lateral-movement/lateral-movement-overview", title: "Lateral Movement Overview" },
+          { id: "red-teaming/11-lateral-movement/remote-service-abuse", title: "Remote Service Abuse" },
+          { id: "red-teaming/11-lateral-movement/credential-reuse-attacks", title: "Credential Reuse Attacks" },
+          { id: "red-teaming/11-lateral-movement/pass-the-hash", title: "Pass the Hash" },
+          { id: "red-teaming/11-lateral-movement/pivoting-techniques", title: "Pivoting Techniques" }
+        ]
+      },
+      {
+        phase: "12 — Command and Control",
+        notes: [
+          { id: "red-teaming/12-command-control/c2-communication", title: "C2 Communication" },
+          { id: "red-teaming/12-command-control/beaconing", title: "Beaconing" },
+          { id: "red-teaming/12-command-control/encrypted-c2", title: "Encrypted C2" },
+          { id: "red-teaming/12-command-control/covert-channels", title: "Covert Channels" },
+          { id: "red-teaming/12-command-control/traffic-obfuscation", title: "Traffic Obfuscation" }
+        ]
+      },
+      {
+        phase: "13 — Data Exfiltration",
+        notes: [
+          { id: "red-teaming/13-data-exfiltration/data-exfiltration-overview", title: "Data Exfiltration Overview" },
+          { id: "red-teaming/13-data-exfiltration/exfiltration-techniques", title: "Exfiltration Techniques" },
+          { id: "red-teaming/13-data-exfiltration/dns-exfiltration", title: "DNS Exfiltration" },
+          { id: "red-teaming/13-data-exfiltration/covert-data-transfer", title: "Covert Data Transfer" },
+          { id: "red-teaming/13-data-exfiltration/sensitive-data-discovery", title: "Sensitive Data Discovery" }
+        ]
+      },
+      {
+        phase: "14 — Impact",
+        notes: [
+          { id: "red-teaming/14-impact/impact-operations", title: "Impact Operations" },
+          { id: "red-teaming/14-impact/data-manipulation", title: "Data Manipulation" },
+          { id: "red-teaming/14-impact/service-disruption", title: "Service Disruption" },
+          { id: "red-teaming/14-impact/ransomware-simulation", title: "Ransomware Simulation" }
+        ]
+      },
+      {
+        phase: "15 — OPSEC",
+        notes: [
+          { id: "red-teaming/15-opsec/red-team-opsec", title: "Red Team OPSEC" },
+          { id: "red-teaming/15-opsec/infrastructure-anonymity", title: "Infrastructure Anonymity" },
+          { id: "red-teaming/15-opsec/log-avoidance", title: "Log Avoidance" },
+          { id: "red-teaming/15-opsec/campaign-stealth", title: "Campaign Stealth" }
+        ]
+      },
+      {
+        phase: "16 — Detection Evasion",
+        notes: [
+          { id: "red-teaming/16-detection-evasion/security-monitoring-bypass", title: "Security Monitoring Bypass" },
+          { id: "red-teaming/16-detection-evasion/alert-evasion", title: "Alert Evasion" },
+          { id: "red-teaming/16-detection-evasion/behavioral-evasion", title: "Behavioral Evasion" }
+        ]
+      },
+      {
+        phase: "17 — Reporting",
+        notes: [
+          { id: "red-teaming/17-reporting/red-team-reporting", title: "Red Team Reporting" },
+          { id: "red-teaming/17-reporting/attack-timeline", title: "Attack Timeline" },
+          { id: "red-teaming/17-reporting/impact-analysis", title: "Impact Analysis" },
+          { id: "red-teaming/17-reporting/security-gap-analysis", title: "Security Gap Analysis" },
+          { id: "red-teaming/17-reporting/remediation-strategy", title: "Remediation Strategy" }
+        ]
       }
     ]
   },
