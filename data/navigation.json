@@ -797,6 +797,21 @@ const NAV = {
         notes: [{ id: "ad-pentesting/06-escalation/privilege-escalation", title: "Domain Privilege Escalation" }]
       }
     ]
+  },
+  
+  "Reverse Engineering": {
+    icon: "🧠",
+    color: "#f78166",
+    phases: [
+      {
+        phase: "01 — Registers",
+        notes: [
+          { id: "reverse-engineering/01-registers/01-x86-registers", title: "x86 Registers" },
+          { id: "reverse-engineering/01-registers/02-registers-size-evolution", title: "Register Size Evolution" },
+          { id: "reverse-engineering/01-registers/03-instruction-pointer", title: "Instruction Pointer (RIP)" }
+        ]
+      }
+    ]
   }
 };
 
@@ -808,7 +823,8 @@ const CAT_FOLDER = {
   "Cloud Security":    "cloud-security",
   "API Pentesting":    "api-pentesting",
   "Linux Essentials":  "linux-essentials",
-  "Active Directory":  "ad-pentesting"
+  "Active Directory":  "ad-pentesting",
+  "Reverse Engineering": "reverse-engineering"
 };
 
 // Flat notes list for search
