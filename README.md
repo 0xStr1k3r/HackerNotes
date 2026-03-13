@@ -71,11 +71,12 @@ Contributions are welcome — whether it's fixing a typo, improving an existing 
    notes/
    ├── web-pentesting/
    ├── pentesting/
-   ├── red-teaming/
-   ├── cloud-security/
-   ├── api-pentesting/
-   └── ad-pentesting/
-   ```
+    ├── red-teaming/
+    ├── cloud-security/
+    ├── api-pentesting/
+    ├── linux-essentials/
+    └── ad-pentesting/
+    ```
 
    Each note is a plain Markdown (`.md`) file. Follow the existing style — use headings, code blocks, and Mermaid diagrams where helpful.
 

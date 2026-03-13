@@ -697,6 +697,77 @@ const NAV = {
     ]
   },
 
+  "Linux Essentials": {
+    icon: "🐧",
+    color: "#7ee787",
+    phases: [
+      {
+        phase: "01 — Linux Foundations",
+        notes: [{ id: "linux-essentials/01-linux-foundations/linux-foundations", title: "Linux Foundations" }]
+      },
+      {
+        phase: "02 — Shell and Command Line Basics",
+        notes: [{ id: "linux-essentials/02-shell-basics/shell-and-command-line-basics", title: "Shell and Command Line Basics" }]
+      },
+      {
+        phase: "03 — Filesystem Navigation and File Operations",
+        notes: [{ id: "linux-essentials/03-filesystem-operations/filesystem-navigation-and-operations", title: "Filesystem Navigation and Operations" }]
+      },
+      {
+        phase: "04 — Text Processing and Data Streams",
+        notes: [{ id: "linux-essentials/04-text-processing/text-processing-and-data-streams", title: "Text Processing and Data Streams" }]
+      },
+      {
+        phase: "05 — Users, Groups, Permissions, and ACL",
+        notes: [{ id: "linux-essentials/05-identity-and-permissions/users-groups-permissions-and-acl", title: "Users, Groups, Permissions, and ACL" }]
+      },
+      {
+        phase: "06 — Software Management and Repositories",
+        notes: [{ id: "linux-essentials/06-software-management/software-management-and-repositories", title: "Software Management and Repositories" }]
+      },
+      {
+        phase: "07 — Process, Service, and Log Management",
+        notes: [{ id: "linux-essentials/07-process-services-logs/process-service-and-log-management", title: "Process, Service, and Log Management" }]
+      },
+      {
+        phase: "08 — Networking Fundamentals and Administration",
+        notes: [{ id: "linux-essentials/08-networking/networking-fundamentals-and-administration", title: "Networking Fundamentals and Administration" }]
+      },
+      {
+        phase: "09 — Storage, Filesystems, LVM, and Mounting",
+        notes: [{ id: "linux-essentials/09-storage-and-filesystems/storage-filesystems-lvm-and-mounting", title: "Storage, Filesystems, LVM, and Mounting" }]
+      },
+      {
+        phase: "10 — Boot Process, GRUB, and Recovery",
+        notes: [{ id: "linux-essentials/10-boot-and-recovery/boot-process-grub-and-recovery", title: "Boot Process, GRUB, and Recovery" }]
+      },
+      {
+        phase: "11 — Bash Scripting and Automation",
+        notes: [{ id: "linux-essentials/11-bash-scripting/bash-scripting-and-automation", title: "Bash Scripting and Automation" }]
+      },
+      {
+        phase: "12 — Scheduling, Monitoring, and Performance",
+        notes: [{ id: "linux-essentials/12-operations-and-performance/scheduling-monitoring-and-performance", title: "Scheduling, Monitoring, and Performance" }]
+      },
+      {
+        phase: "13 — Remote Administration and SSH",
+        notes: [{ id: "linux-essentials/13-remote-administration/remote-administration-and-ssh", title: "Remote Administration and SSH" }]
+      },
+      {
+        phase: "14 — Security Hardening (Firewall, SELinux, Updates)",
+        notes: [{ id: "linux-essentials/14-security-hardening/security-hardening-firewall-selinux-updates", title: "Security Hardening (Firewall, SELinux, Updates)" }]
+      },
+      {
+        phase: "15 — Containers and Virtualization Basics",
+        notes: [{ id: "linux-essentials/15-containers-basics/containers-and-virtualization-basics", title: "Containers and Virtualization Basics" }]
+      },
+      {
+        phase: "16 — Troubleshooting, Capstone Labs, and Next Steps",
+        notes: [{ id: "linux-essentials/16-capstone-and-next-steps/troubleshooting-capstone-and-next-steps", title: "Troubleshooting, Capstone Labs, and Next Steps" }]
+      }
+    ]
+  },
+
   "Active Directory": {
     icon: "🏛️",
     color: "#e3b341",
@@ -736,6 +807,7 @@ const CAT_FOLDER = {
   "Red Teaming":       "red-teaming",
   "Cloud Security":    "cloud-security",
   "API Pentesting":    "api-pentesting",
+  "Linux Essentials":  "linux-essentials",
   "Active Directory":  "ad-pentesting"
 };
 

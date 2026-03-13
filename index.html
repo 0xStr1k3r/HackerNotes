@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HackerNotes — Cybersecurity Knowledge Base</title>
-  <meta name="description" content="Deep technical cybersecurity notes — web pentesting, red teaming, cloud security, AD attacks, API security."/>
+  <meta name="description" content="Deep technical cybersecurity notes — web pentesting, red teaming, cloud security, AD attacks, API security, and Linux essentials."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="assets/css/main.css"/>
@@ -48,7 +48,7 @@
     <!-- STATS -->
     <div class="stats-bar" id="stats-bar">
       <div class="stat-item"><div class="stat-num" id="stat-notes">0</div><div class="stat-label">Notes</div></div>
-      <div class="stat-item"><div class="stat-num" id="stat-paths">6</div><div class="stat-label">Paths</div></div>
+      <div class="stat-item"><div class="stat-num" id="stat-paths">0</div><div class="stat-label">Paths</div></div>
       <div class="stat-item"><div class="stat-num" id="stat-phases">42</div><div class="stat-label">Phases</div></div>
       <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Free</div></div>
     </div>
@@ -72,6 +72,7 @@
       "Red Teaming":       "Adversary simulation — C2 infra, initial access, lateral movement, persistence and EDR evasion.",
       "Cloud Security":    "AWS/Azure/GCP attacks, IAM exploitation, container escapes and cloud misconfigurations.",
       "API Pentesting":    "REST, GraphQL, gRPC security — BOLA, mass assignment, rate limiting and auth bypass.",
+      "Linux Essentials":  "Beginner to intermediate Linux roadmap — shell, filesystem, permissions, services, networking, security, and automation.",
       "Active Directory":  "AD attacks — Kerberoasting, AS-REP roasting, DCSync, Golden Ticket and AD CS exploitation."
     };
 
@@ -102,6 +103,7 @@
     });
 
     // Animate stats
+    document.getElementById('stat-paths').textContent = Object.keys(NAV).length;
     document.getElementById('stat-phases').textContent = totalPhases;
     const el = document.getElementById('stat-notes');
     let c = 0, step = Math.ceil(totalNotes/40);
