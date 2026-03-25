@@ -809,6 +809,7 @@ const NAV = {
           { id: "reverse-engineering/x86-64-assembly/01-registers/01-x86-registers", title: "x86 Registers" },
           { id: "reverse-engineering/x86-64-assembly/01-registers/02-registers-size-evolution", title: "Register Size Evolution" },
           { id: "reverse-engineering/x86-64-assembly/01-registers/03-instruction-pointer", title: "Instruction Pointer (RIP)" }
+          { id: "reverse-engineering/x86-64-assembly/02-stack/stack-overview", title: "Stack Overview" }
         ]
       }
     ]
